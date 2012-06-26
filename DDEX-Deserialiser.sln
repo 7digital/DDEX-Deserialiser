@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDEX-Deserialiser", "src\DDEX-Deserialiser\DDEX-Deserialiser.csproj", "{361765AF-5A05-4198-909C-512B6C349C17}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{891A0A11-48B3-4A7D-A683-D1A7D481762F}"
+	ProjectSection(SolutionItems) = preProject
+		tools\SevenDigital.Parsing.XsdToObject.exe = tools\SevenDigital.Parsing.XsdToObject.exe
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xsds", "xsds", "{0D8C3B2F-F107-4B20-B024-B144D740E90B}"
+	ProjectSection(SolutionItems) = preProject
+		xsds\ddex.xsd = xsds\ddex.xsd
+		xsds\ddexC.xsd = xsds\ddexC.xsd
+		xsds\iso3166a2.xsd = xsds\iso3166a2.xsd
+		xsds\iso4217a.xsd = xsds\iso4217a.xsd
+		xsds\iso639a2.xsd = xsds\iso639a2.xsd
+		xsds\release-notification.xsd = xsds\release-notification.xsd
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deserialiser.Integration.Tests", "src\Deserialiser.Integration.Tests\Deserialiser.Integration.Tests.csproj", "{4DEF093E-1481-4FFD-ADBD-26548D049340}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{361765AF-5A05-4198-909C-512B6C349C17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{361765AF-5A05-4198-909C-512B6C349C17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{361765AF-5A05-4198-909C-512B6C349C17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{361765AF-5A05-4198-909C-512B6C349C17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DEF093E-1481-4FFD-ADBD-26548D049340}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DEF093E-1481-4FFD-ADBD-26548D049340}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DEF093E-1481-4FFD-ADBD-26548D049340}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DEF093E-1481-4FFD-ADBD-26548D049340}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
