@@ -54,7 +54,7 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_image_technical_details_have_techinical_resource_reference()
         {
-            Assert.That(GetImageTechnicalDetails().TechnicalResourceDetailsReference, Is.EqualTo("T3"));
+            Assert.That(GetImageTechnicalDetails().TechnicalResourceDetailsReference, Is.EqualTo("T2"));
         }
 
         [Test]
