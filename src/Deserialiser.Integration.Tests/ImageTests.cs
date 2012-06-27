@@ -12,11 +12,81 @@ namespace Deserialiser.Unit.Tests
             return ddex.root.ResourceList.Images.Single();
         }
 
+        private ImageDetailsByTerritory GetImageDetails()
+        {
+            return GetImage().ImageDetailsByTerritorys.Single();
+        }
+
+        private TechnicalImageDetails GetImageTechnicalDetails()
+        {
+            return GetImageDetails().TechnicalImageDetails.Single();
+        }
+
+        private File GetImageFile()
+        {
+            return GetImageTechnicalDetails().Files.Single();
+        }
+
         [Test]
         public void Should_image_be_a_cover_image()
         {
             Assert.That(GetImage().ImageType, Is.EqualTo("FrontCoverImage"));
         }
 
+        [Test]
+        public void Should_image_have_proprietary_id()
+        {
+            Assert.That(GetImage().ImageIds.Single().ProprietaryIds.Single(), Is.EqualTo("ICPN_VALUE.jpg"));
+        }
+
+        [Test]
+        public void Should_image_have_resource_reference()
+        {
+            Assert.That(GetImage().ResourceReference, Is.EqualTo("A3"));
+        }
+
+        [Test]
+        public void Should_image_have_worldwide_territory_details()
+        {
+            Assert.That(GetImageDetails().TerritoryCodes.Single(), Is.EqualTo("Worldwide"));
+        }
+
+        [Test]
+        public void Should_image_technical_details_have_techinical_resource_reference()
+        {
+            Assert.That(GetImageTechnicalDetails().TechnicalResourceDetailsReference, Is.EqualTo("T3"));
+        }
+
+        [Test]
+        public void Should_image_technical_details_have_codec_type()
+        {
+            Assert.That(GetImageTechnicalDetails().ImageCodecType, Is.EqualTo("JPEG"));
+        }
+
+        [Test]
+        public void Should_image_technical_details_have_image_size()
+        {
+            Assert.That(GetImageTechnicalDetails().ImageWidth, Is.EqualTo("640"));
+            Assert.That(GetImageTechnicalDetails().ImageHeight, Is.EqualTo("480"));
+        }
+
+        [Test]
+        public void Should_image_file_have_name()
+        {
+            Assert.That(GetImageFile().FileName, Is.EqualTo("ICPN_VALUE.jpg"));
+        }
+
+        [Test]
+        public void Should_image_file_have_path()
+        {
+            Assert.That(GetImageFile().FilePath, Is.EqualTo("/resources"));
+        }
+
+        [Test]
+        public void Should_image_file_have_hash_sum()
+        {
+            Assert.That(GetImageFile().HashSum.HashSumAlgorithmType, Is.EqualTo("MD5"));
+            Assert.That(GetImageFile().HashSum.HashSumProp, Is.EqualTo("e2h23d23e32a65463245634ff27364cc"));
+        }
     }
 }
