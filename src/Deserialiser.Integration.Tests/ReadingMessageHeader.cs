@@ -32,7 +32,7 @@ namespace Deserialiser.Unit.Tests
 		[Test]
 		public void Message_sender_should_be_read_correctly ()
 		{
-			ddex.root.MessageHeader.MessageSender.PartyName.FullName.should_be_equal_to("ICanHaz Music Group");
+			ddex.root.MessageHeader.MessageSender.PartyName.FullName.Value.should_be_equal_to("ICanHaz Music Group");
 		}
 	}
 }

@@ -30,13 +30,13 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_image_be_a_cover_image()
         {
-            Assert.That(GetImage().ImageType, Is.EqualTo("FrontCoverImage"));
+            Assert.That(GetImage().ImageType.Value, Is.EqualTo("FrontCoverImage"));
         }
 
         [Test]
         public void Should_image_have_proprietary_id()
         {
-            Assert.That(GetImage().ImageIds.Single().ProprietaryIds.Single(), Is.EqualTo("ICPN_VALUE.jpg"));
+            Assert.That((string)GetImage().ImageIds.Single().ProprietaryIds.Single(), Is.EqualTo("ICPN_VALUE.jpg"));
         }
 
         [Test]
@@ -60,14 +60,14 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_image_technical_details_have_codec_type()
         {
-            Assert.That(GetImageTechnicalDetails().ImageCodecType, Is.EqualTo("JPEG"));
+            Assert.That((string)GetImageTechnicalDetails().ImageCodecType, Is.EqualTo("JPEG"));
         }
 
         [Test]
         public void Should_image_technical_details_have_image_size()
         {
-            Assert.That(GetImageTechnicalDetails().ImageWidth, Is.EqualTo("640"));
-            Assert.That(GetImageTechnicalDetails().ImageHeight, Is.EqualTo("480"));
+            Assert.That((string)GetImageTechnicalDetails().ImageWidth, Is.EqualTo("640"));
+            Assert.That((string)GetImageTechnicalDetails().ImageHeight, Is.EqualTo("480"));
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_image_file_have_hash_sum()
         {
-            Assert.That(GetImageFile().HashSum.HashSumAlgorithmType, Is.EqualTo("MD5"));
+            Assert.That(GetImageFile().HashSum.HashSumAlgorithmType.ToString(), Is.EqualTo("MD5"));
             Assert.That(GetImageFile().HashSum.HashSumProp, Is.EqualTo("e2h23d23e32a65463245634ff27364cc"));
         }
     }

@@ -34,7 +34,7 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_sound_recording_be_a_musical_work_sound_recording()
         {
-            Assert.That(GetFirstRecording().SoundRecordingType, Is.EqualTo("MusicalWorkSoundRecording"));
+            Assert.That(GetFirstRecording().SoundRecordingType.Value, Is.EqualTo("MusicalWorkSoundRecording"));
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_sound_recording_have_title()
         {
-            Assert.That(GetFirstRecording().ReferenceTitle.TitleText, Is.EqualTo("Destination"));
+            Assert.That(GetFirstRecording().ReferenceTitle.TitleText.Value, Is.EqualTo("Destination"));
         }
 
         [Test]
@@ -70,31 +70,31 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_sound_recording_detials_have_correct_titles()
         {
-            Assert.That(GetTerritoryDetails().Titles.Select(t => t.TitleText), Is.EquivalentTo(new List<string> { "Destination", "Destination" }));
+            Assert.That(GetTerritoryDetails().Titles.Select(t => t.TitleText.Value), Is.EquivalentTo(new List<string> { "Destination", "Destination" }));
         }
 
         [Test]
         public void Should_sound_recording_details_have_artist_party_name()
         {
-            Assert.That(GetTerritoryDetails().DisplayArtists.Single().PartyNames.Single().FullName, Is.EqualTo("Messages"));
+            Assert.That(GetTerritoryDetails().DisplayArtists.Single().PartyNames.Single().FullName.Value, Is.EqualTo("Messages"));
         }
 
         [Test]
         public void Should_sound_recording_details_have_artist_party_id()
         {
-            Assert.That(GetTerritoryDetails().DisplayArtists.Single().PartyId, Is.EqualTo("448566"));
+            Assert.That(GetTerritoryDetails().DisplayArtists.Single().PartyId.Value, Is.EqualTo("448566"));
         }
 
         [Test]
         public void Should_sound_recording_details_have_artist_role()
         {
-            Assert.That(GetTerritoryDetails().DisplayArtists.Single().ArtistRoles.Single(), Is.EqualTo("MainArtist"));
+            Assert.That(GetTerritoryDetails().DisplayArtists.Single().ArtistRoles.Single().Value, Is.EqualTo("MainArtist"));
         }
 
         [Test]
         public void Should_sound_recording_detials_have_correct_labels()
         {
-            Assert.That(GetTerritoryDetails().LabelNames, Is.EquivalentTo(new List<string> { "Me Iz Label", "IR A Majr" }));
+            Assert.That(GetTerritoryDetails().LabelNames.Select(l=>l.Value), Is.EquivalentTo(new List<string> { "Me Iz Label", "IR A Majr" }));
         }
 
         [Test]
@@ -107,13 +107,13 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_sound_recording_details_have_genre()
         {
-            Assert.That(GetTerritoryDetails().Genres.Single().GenreText, Is.EqualTo("Alternative Rock"));
+            Assert.That(GetTerritoryDetails().Genres.Single().GenreText.Value, Is.EqualTo("Alternative Rock"));
         }
 
         [Test]
         public void Should_sound_recording_details_have_parental_warning_type()
         {
-            Assert.That(GetTerritoryDetails().ParentalWarningTypes.Single(), Is.EqualTo("NoAdviceAvailable"));
+            Assert.That(GetTerritoryDetails().ParentalWarningTypes.Single().Value, Is.EqualTo("NoAdviceAvailable"));
         }
 
         [Test]
@@ -131,13 +131,13 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_sound_recording_technical_details_have_codec_type()
         {
-            Assert.That(GetTechnicalDetails().AudioCodecType, Is.EqualTo("MP3"));
+            Assert.That((string)GetTechnicalDetails().AudioCodecType, Is.EqualTo("MP3"));
         }
 
         [Test]
         public void Should_sound_recording_technical_details_have_bit_rate()
         {
-            Assert.That(GetTechnicalDetails().BitRate, Is.EqualTo("256"));
+            Assert.That((string)GetTechnicalDetails().BitRate, Is.EqualTo("256"));
         }
 
         [Test]
@@ -149,7 +149,7 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_sound_recording_technical_details_have_sampling_rate()
         {
-            Assert.That(GetTechnicalDetails().SamplingRate, Is.EqualTo("44.1"));
+            Assert.That((string)GetTechnicalDetails().SamplingRate, Is.EqualTo("44.1"));
         }
 
         [Test]
@@ -181,7 +181,7 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_sound_recording_file_have_hash_sum()
         {
-            Assert.That(GetFile().HashSum.HashSumAlgorithmType, Is.EqualTo("MD5"));
+            Assert.That((string)GetFile().HashSum.HashSumAlgorithmType, Is.EqualTo("MD5"));
             Assert.That(GetFile().HashSum.HashSumProp, Is.EqualTo("4c342562837456fff325434e325a24cf"));
         }
     }
