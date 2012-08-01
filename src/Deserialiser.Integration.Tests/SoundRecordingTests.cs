@@ -13,7 +13,7 @@ namespace Deserialiser.Unit.Tests
     {
         private SoundRecording GetFirstRecording()
         {
-            return ddex.root.ResourceList.SoundRecordings.First();
+            return ddex.Root.ResourceList.SoundRecordings.First();
         }
 
         private TechnicalSoundRecordingDetails GetTechnicalDetails()

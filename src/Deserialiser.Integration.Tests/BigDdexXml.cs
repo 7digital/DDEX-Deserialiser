@@ -1,4 +1,5 @@
-﻿using DDEX_Deserialiser;
+﻿using System.IO;
+using DDEX_Deserialiser;
 using NUnit.Framework;
 
 namespace Deserialiser.Unit.Tests
@@ -12,5 +13,7 @@ namespace Deserialiser.Unit.Tests
 		{
 			ddex = new DDEX("artifacts/ddex-sample.xml");
 		}
+
+		
 	}
 }

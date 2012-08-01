@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BigDdexXml.cs" />
+    <Compile Include="DDEXConstructionTests.cs" />
     <Compile Include="ImageTests.cs" />
     <Compile Include="NUnitExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -9,7 +9,7 @@ namespace Deserialiser.Unit.Tests
     {
         private Image GetImage()
         {
-            return ddex.root.ResourceList.Images.Single();
+            return ddex.Root.ResourceList.Images.Single();
         }
 
         private ImageDetailsByTerritory GetImageDetails()
