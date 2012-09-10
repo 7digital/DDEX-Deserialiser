@@ -8,16 +8,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{891A0A11
 		tools\SevenDigital.Parsing.XsdToObject.exe = tools\SevenDigital.Parsing.XsdToObject.exe
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xsds", "xsds", "{0D8C3B2F-F107-4B20-B024-B144D740E90B}"
-	ProjectSection(SolutionItems) = preProject
-		xsds\ddex.xsd = xsds\ddex.xsd
-		xsds\ddexC.xsd = xsds\ddexC.xsd
-		xsds\iso3166a2.xsd = xsds\iso3166a2.xsd
-		xsds\iso4217a.xsd = xsds\iso4217a.xsd
-		xsds\iso639a2.xsd = xsds\iso639a2.xsd
-		xsds\release-notification.xsd = xsds\release-notification.xsd
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deserialiser.Integration.Tests", "src\Deserialiser.Integration.Tests\Deserialiser.Integration.Tests.csproj", "{4DEF093E-1481-4FFD-ADBD-26548D049340}"
 EndProject
 Global
