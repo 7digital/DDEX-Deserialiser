@@ -12,7 +12,8 @@ namespace DDEX_Deserialiser.Utils
 
 		public static XmlSchema LoadSchema(string fileName)
 		{
-			return XmlSchema.Read(GetSchemaStream(fileName), (o, e) => { });
+			using (var stream = GetSchemaStream(fileName))
+				return XmlSchema.Read(stream, (o, e) => { });
 		}
 	}
 }
