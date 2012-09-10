@@ -37,11 +37,12 @@ namespace DDEX_Deserialiser
 			{
 				var schemas = new XmlSchemaSet();
 
-				AddXsdToSchema(schemas, "iso3166a2.xsd");
+				//TODO: ensure that files are taken from embedded resources not net
+				/*AddXsdToSchema(schemas, "iso3166a2.xsd");
 				AddXsdToSchema(schemas, "iso4217a.xsd");
 				AddXsdToSchema(schemas, "iso639a2.xsd");
 				AddXsdToSchema(schemas, "ddex.xsd");
-				AddXsdToSchema(schemas, "ddexC.xsd");
+				AddXsdToSchema(schemas, "ddexC.xsd");*/
 				AddXsdToSchema(schemas, "release-notification.xsd");
 
 				_ddex_schema = schemas;
