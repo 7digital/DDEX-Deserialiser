@@ -11,12 +11,12 @@ namespace DDEX_Deserialiser
 		public NewReleaseMessage Root { get; private set; }
 
 		public DDEX(string sourceFilePath, bool verifySchema = false)
-			: this(XDocument.Load(sourceFilePath), verifySchema)
+			: this(XDocument.Load(sourceFilePath, LoadOptions.SetLineInfo | LoadOptions.PreserveWhitespace), verifySchema)
 		{
 		}
 
 		public DDEX(Stream stream, bool verifySchema = false)
-			: this(XDocument.Load(stream), verifySchema)
+			: this(XDocument.Load(stream, LoadOptions.SetLineInfo | LoadOptions.PreserveWhitespace), verifySchema)
 		{
 		}
 
