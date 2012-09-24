@@ -140,7 +140,7 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_sound_recording_technical_details_have_number_of_channels()
         {
-            Assert.That(GetTechnicalDetails().NumberOfChannels, Is.EqualTo("2"));
+            Assert.That(GetTechnicalDetails().NumberOfChannels, Is.EqualTo(2));
         }
 
         [Test]
@@ -152,7 +152,7 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_sound_recording_technical_details_have_is_preview()
         {
-            Assert.That(GetTechnicalDetails().IsPreview, Is.EqualTo("false"));
+            Assert.That(GetTechnicalDetails().IsPreview, Is.EqualTo(false));
         }
 
         [Test]
