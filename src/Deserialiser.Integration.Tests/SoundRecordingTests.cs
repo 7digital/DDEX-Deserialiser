@@ -134,7 +134,7 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_sound_recording_technical_details_have_bit_rate()
         {
-            Assert.That((string)GetTechnicalDetails().BitRate, Is.EqualTo("256"));
+            Assert.That(GetTechnicalDetails().BitRate.Value, Is.EqualTo(256));
         }
 
         [Test]
@@ -146,7 +146,7 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_sound_recording_technical_details_have_sampling_rate()
         {
-            Assert.That((string)GetTechnicalDetails().SamplingRate, Is.EqualTo("44.1"));
+            Assert.That(GetTechnicalDetails().SamplingRate.Value, Is.EqualTo(44.1));
         }
 
         [Test]
@@ -158,7 +158,7 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_sound_recording_technical_details_have_preview_details()
         {
-            Assert.That(GetTechnicalDetails().PreviewDetails.StartPoint, Is.EqualTo("93"));
+            Assert.That(GetTechnicalDetails().PreviewDetails.StartPoint.Value, Is.EqualTo(93));
             Assert.That(GetTechnicalDetails().PreviewDetails.Duration, Is.EqualTo("PT0H2M28.000S"));
             Assert.That(GetTechnicalDetails().PreviewDetails.ExpressionType, Is.EqualTo("Informative"));
         }

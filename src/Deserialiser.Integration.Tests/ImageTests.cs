@@ -66,8 +66,8 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_image_technical_details_have_image_size()
         {
-            Assert.That((string)GetImageTechnicalDetails().ImageWidth, Is.EqualTo("640"));
-            Assert.That((string)GetImageTechnicalDetails().ImageHeight, Is.EqualTo("480"));
+            Assert.That(GetImageTechnicalDetails().ImageWidth.Value, Is.EqualTo(640));
+            Assert.That(GetImageTechnicalDetails().ImageHeight.Value, Is.EqualTo(480));
         }
 
         [Test]
