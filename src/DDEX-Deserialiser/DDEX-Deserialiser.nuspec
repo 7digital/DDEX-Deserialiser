@@ -14,4 +14,7 @@
     <copyright>Copyright 7digital Media Ltd. 2013</copyright>
     <tags>ddex parsing deserialiser 7digital</tags>
   </metadata>
+  <files>
+    <file src="bin\Release\*.pdb" target="lib\net40"/>
+  </files>
 </package>
