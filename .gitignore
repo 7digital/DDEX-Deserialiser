@@ -29,3 +29,5 @@ build
 *.ncrunchproject
 *.ncrunchsolution.user
 docs
+packages/
+.nuget/*.exe
