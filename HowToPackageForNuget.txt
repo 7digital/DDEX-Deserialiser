@@ -1,0 +1,4 @@
+1. Update the AssemblyInfo.cs
+2. Rebuild the project in Release configuration
+3. Run: .nuget\nuget pack src\DDEX-Deserialiser\DDEX-Deserialiser.csproj -IncludeReferencedProjects
+4. Upload the package to https://www.nuget.org/packages/DDEX-Deserialiser
