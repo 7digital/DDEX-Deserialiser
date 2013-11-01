@@ -10,7 +10,7 @@
 	<iconUrl>https://1.gravatar.com/avatar/793d9bae7c57fb6375a9e5bb2ecd6061</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial NuGet release.</releaseNotes>
+    <releaseNotes>Using System.Xml.XmlConvert class instead of .Parse() methods.</releaseNotes>
     <copyright>Copyright 7digital Media Ltd. 2013</copyright>
     <tags>ddex parsing deserialiser 7digital</tags>
   </metadata>
