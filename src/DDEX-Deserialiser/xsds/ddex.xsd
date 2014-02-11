@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:ddex="http://ddex.net/xml/20120404/ddex"
-           xmlns:iso639a2="http://ddex.net/xml/20120404/iso639a2"
-           xmlns:iso4217a="http://ddex.net/xml/20120404/iso4217a"
-           xmlns:iso3166a2="http://ddex.net/xml/20120404/iso3166a2"
-           targetNamespace="http://ddex.net/xml/20120404/ddex"
-           elementFormDefault="unqualified"
-           attributeFormDefault="unqualified">
-   <xs:import namespace="http://ddex.net/xml/20120404/iso639a2"  schemaLocation="http://ddex.net/xml/20120404/iso639a2.xsd"/>
-   <xs:import namespace="http://ddex.net/xml/20120404/iso4217a"  schemaLocation="http://ddex.net/xml/20120404/iso4217a.xsd"/>
- <xs:import namespace="http://ddex.net/xml/20120404/iso3166a2"  schemaLocation="http://ddex.net/xml/20120404/iso3166a2.xsd"/> 
+   xmlns:ddex="http://ddex.net/xml/20121219/ddex"
+   xmlns:iso639a2="http://ddex.net/xml/20121219/iso639a2"
+   xmlns:iso4217a="http://ddex.net/xml/20121219/iso4217a"
+   xmlns:iso3166a2="http://ddex.net/xml/20121219/iso3166a2"
+   targetNamespace="http://ddex.net/xml/20121219/ddex" elementFormDefault="unqualified"
+   attributeFormDefault="unqualified">
+   <xs:import namespace="http://ddex.net/xml/20121219/iso639a2" schemaLocation="iso639a2.xsd"/>
+   <xs:import namespace="http://ddex.net/xml/20121219/iso4217a" schemaLocation="iso4217a.xsd"/>
+   <xs:import namespace="http://ddex.net/xml/20121219/iso3166a2" schemaLocation="iso3166a2.xsd"/>
    <xs:annotation>
       <xs:documentation>© 2006-2012 Digital Data Exchange, LLC (DDEX)</xs:documentation>
    </xs:annotation>
@@ -1105,6 +1104,11 @@
                <xs:documentation source="ddex:Definition">A ddex:CommercialModel in which royalties are based on performances.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
+         <xs:enumeration value="RightsClaimModel">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:CommercialModel in which a ddex:MessageSender is claiming ownership of rights in ddex:Release(s).</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
          <xs:enumeration value="SubscriptionModel">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:CommercialModel where the ddex:Service or ddex:Product offering is financed by revenue generated from a ddex:Customer ddex:Subscription.</xs:documentation>
@@ -1599,6 +1603,11 @@
          <xs:enumeration value="CYP">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Cyprus Pound (deprecated).</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="EEK">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Kroon (deprecated).</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="MTL">
@@ -2228,6 +2237,11 @@
                <xs:documentation source="ddex:Definition">Insufficient information has been made to grant a ddex:License or to make a ddex:Claim.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
+         <xs:enumeration value="LicenseeNotAuthorized">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The ddex:Licensee indicates that it is not authorized to provide a ddex:License for the ddex:Work.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
          <xs:enumeration value="MedleyRequest">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Information about the individual ddex:Works that make up the medley needs to be provided before a ddex:License might be issued or a ddex:Claim be made.</xs:documentation>
@@ -2293,6 +2307,11 @@
                <xs:documentation source="ddex:Definition">The ddex:Licensee indicates that the ddex:Work has not been used.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
+         <xs:enumeration value="WorkUnknown">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The ddex:Licensee indicates that the ddex:Work is not known.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
       </xs:restriction>
    </xs:simpleType>
    <xs:simpleType name="LicenseOrClaimRequestUpdateReason">
@@ -2350,6 +2369,48 @@
          <xs:enumeration value="UserDefined">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Type of an ddex:Entity which is defined by a sender of a ddex:DdexMessage in a manner acceptable to its recipient.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="LicenseRejectionReason">
+      <xs:annotation>
+         <xs:documentation source="ddex:Definition">A ddex:Type of reason for a rejecting a ddex:License.</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="DisagreementOverRoyalties">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A disagreement over ddex:Royalties or ddex:RoyaltyRate.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="DisagreementOverScopeOfLicense">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A disagreement over the scope of the ddex:License (e.g. the use types granted).</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="LicenseExists">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:License is already in place.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="LicenseNotNeeded">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:License is not needed any more.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="WrongAddressee">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The ddex:MessageSender is not the right ddex:Party to send the ddex:License to.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="UserDefined">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Type of an ddex:Entity which is defined by a sender of a ddex:DdexMessage in a manner acceptable to its recipient.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="WorkInPublicDomain">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Work is in the public domain in a requested ddex:Territory.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
       </xs:restriction>
@@ -4579,6 +4640,11 @@ within the digital boxed sets resource group structure. </xs:documentation>
                <xs:documentation source="ddex:Definition">A policy where the recipient of the message shall block any use of a ddex:Release or ddex:Resource that meets the condition.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
+         <xs:enumeration value="Monetize">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A policy where the recipient of the message may make the Release or Resource that meets the condition available for commercial purposes and shall report revenues to the relevant rights holder(s).</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
       </xs:restriction>
    </xs:simpleType>
    <xs:simpleType name="RightsControllerRole">
@@ -4609,6 +4675,28 @@ within the digital boxed sets resource group structure. </xs:documentation>
          <xs:enumeration value="Unknown">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Type of an ddex:Entity used when a sender of a ddex:DdexMessage wishes to indicate that the value within the allowed value set is unknown.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="RightsControllerType">
+      <xs:annotation>
+         <xs:documentation source="ddex:Definition">A type of a ddex:RightsController.</xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="OriginalOwner">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:RightsController who owns and/or controls the original Rights in a ddex:MusicalWork and/or a ddex:Resource.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="SuccessorInTitle">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:RightsController who is a successor in title.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="ExclusiveLicensee">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">An exclusive ddex:Licensee.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
       </xs:restriction>
@@ -4650,6 +4738,11 @@ within the digital boxed sets resource group structure. </xs:documentation>
          <xs:documentation source="ddex:Definition">A ddex:Type of ddex:RoyaltyRate according to the calculation method.</xs:documentation>
       </xs:annotation>
       <xs:restriction base="xs:string">
+         <xs:enumeration value="BudgetRoyaltyRate">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:RoyaltyRate for ddex:Products classified as 'budget'.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
          <xs:enumeration value="ControlledCompositionRoyaltyRate">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:RoyaltyRate calculated through provisions of a contract containing a 'controlled composition' clause.</xs:documentation>
@@ -5450,6 +5543,11 @@ within the digital boxed sets resource group structure. </xs:documentation>
          <xs:enumeration value="PrivateCopy">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">To ddex:Copy a ddex:Resource for private use. This UseType is typically used when reporting revenues related to private copying levies.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="PurchaseAsPhysicalProduct">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">To purchase a ddex:PhysicalProduct.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="Rent">

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:iso4217a="http://ddex.net/xml/20120404/iso4217a"
-           targetNamespace="http://ddex.net/xml/20120404/iso4217a"
-           elementFormDefault="unqualified"
-           attributeFormDefault="unqualified">
+   xmlns:iso4217a="http://ddex.net/xml/20121219/iso4217a"
+   targetNamespace="http://ddex.net/xml/20121219/iso4217a" elementFormDefault="unqualified"
+   attributeFormDefault="unqualified">
    <xs:annotation>
       <xs:documentation>© 2006-2012 Digital Data Exchange, LLC (DDEX)</xs:documentation>
    </xs:annotation>
@@ -225,11 +224,6 @@
          <xs:enumeration value="DZD">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Algerian Dinar.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="EEK">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Kroon.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="EGP">

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:iso639a2="http://ddex.net/xml/20120404/iso639a2"
-           targetNamespace="http://ddex.net/xml/20120404/iso639a2"
-           elementFormDefault="unqualified"
-           attributeFormDefault="unqualified">
+   xmlns:iso639a2="http://ddex.net/xml/20121219/iso639a2"
+   targetNamespace="http://ddex.net/xml/20121219/iso639a2" elementFormDefault="unqualified"
+   attributeFormDefault="unqualified">
    <xs:annotation>
       <xs:documentation>© 2006-2012 Digital Data Exchange, LLC (DDEX)</xs:documentation>
    </xs:annotation>
@@ -22,6 +21,11 @@
                <xs:documentation source="ddex:Definition">Abkhazian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
+         <xs:enumeration value="ae">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Avestan.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
          <xs:enumeration value="af">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Afrikaans.</xs:documentation>
@@ -32,19 +36,9 @@
                <xs:documentation source="ddex:Definition">Akan.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="sq">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Albanian.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
          <xs:enumeration value="am">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Amharic.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="ar">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Arabic.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="an">
@@ -52,9 +46,9 @@
                <xs:documentation source="ddex:Definition">Aragonese.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="hy">
+         <xs:enumeration value="ar">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Armenian.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Arabic.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="as">
@@ -65,11 +59,6 @@
          <xs:enumeration value="av">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Avaric.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="ae">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Avestan.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="ay">
@@ -87,24 +76,14 @@
                <xs:documentation source="ddex:Definition">Bashkir.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="bm">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Bambara.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="eu">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Basque.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
          <xs:enumeration value="be">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Belarusian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="bn">
+         <xs:enumeration value="bg">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Bengali.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Bulgarian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="bh">
@@ -117,14 +96,19 @@
                <xs:documentation source="ddex:Definition">Bislama.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
+         <xs:enumeration value="bm">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Bambara.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="bn">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Bengali.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
          <xs:enumeration value="bo">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Tibetan.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="bs">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Bosnian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="br">
@@ -132,14 +116,9 @@
                <xs:documentation source="ddex:Definition">Breton.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="bg">
+         <xs:enumeration value="bs">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Bulgarian.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="my">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Burmese.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Bosnian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="ca">
@@ -147,39 +126,14 @@
                <xs:documentation source="ddex:Definition">Catalan or Valencian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="cs">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Czech.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="ch">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Chamorro.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
          <xs:enumeration value="ce">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Chechen.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="zh">
+         <xs:enumeration value="ch">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Chinese.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="cu">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Church Slavic or Old Slavonic or Church Slavonic or Old Bulgarian or Old Church Slavonic.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="cv">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Chuvash.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="kw">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Cornish.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Chamorro.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="co">
@@ -190,6 +144,21 @@
          <xs:enumeration value="cr">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Cree.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="cs">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Czech.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="cu">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Church Slavic or Old Slavonic or Church Slavonic or Old Bulgarian or Old Church Slavonic.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="cv">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Chuvash.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="cy">
@@ -209,17 +178,17 @@
          </xs:enumeration>
          <xs:enumeration value="dv">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Divehi.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="nl">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Dutch or Flemish.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Divehi or Dhivehi or Maldavian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="dz">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Dzongkha.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="ee">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Ewe.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="el">
@@ -237,19 +206,19 @@
                <xs:documentation source="ddex:Definition">Esperanto.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
+         <xs:enumeration value="es">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Spanish or Castilian.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
          <xs:enumeration value="et">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Estonian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="ee">
+         <xs:enumeration value="eu">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Ewe.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="fo">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Faroese.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Basque.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="fa">
@@ -257,14 +226,24 @@
                <xs:documentation source="ddex:Definition">Persian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="fj">
+         <xs:enumeration value="ff">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Fijian.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Fulah.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="fi">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Finnish.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="fj">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Fijian.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="fo">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Faroese.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="fr">
@@ -274,22 +253,7 @@
          </xs:enumeration>
          <xs:enumeration value="fy">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Frisian.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="ff">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Fulah.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="ka">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Georgian.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="gd">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Gaelic or Scottish Gaelic.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Western Frisian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="ga">
@@ -297,14 +261,14 @@
                <xs:documentation source="ddex:Definition">Irish.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="gl">
+         <xs:enumeration value="gd">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Gallegan.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Gaelic or Scottish Gaelic.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="gv">
+         <xs:enumeration value="gl">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Manx.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Galician.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="gn">
@@ -317,9 +281,9 @@
                <xs:documentation source="ddex:Definition">Gujarati.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="ht">
+         <xs:enumeration value="gv">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Haitian or Haitian Creole.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Manx.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="ha">
@@ -330,11 +294,6 @@
          <xs:enumeration value="he">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Hebrew.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="hz">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Herero.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="hi">
@@ -352,39 +311,24 @@
                <xs:documentation source="ddex:Definition">Croatian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
+         <xs:enumeration value="ht">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Haitian or Haitian Creole.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
          <xs:enumeration value="hu">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Hungarian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="ig">
+         <xs:enumeration value="hy">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Igbo.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Armenian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="is">
+         <xs:enumeration value="hz">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Icelandic.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="io">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Ido.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="ii">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Sichuan Yi.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="iu">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Inuktitut.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="ie">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Interlingue.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Herero.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="ia">
@@ -397,9 +341,34 @@
                <xs:documentation source="ddex:Definition">Indonesian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
+         <xs:enumeration value="ie">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Interlingue or Occidental.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="ig">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Igbo.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="ii">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Sichuan Yi or Nuosu.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
          <xs:enumeration value="ik">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Inupiaq.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="io">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Ido.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="is">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Icelandic.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="it">
@@ -407,9 +376,9 @@
                <xs:documentation source="ddex:Definition">Italian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="jv">
+         <xs:enumeration value="iu">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Javanese.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Inuktitut.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="ja">
@@ -417,54 +386,14 @@
                <xs:documentation source="ddex:Definition">Japanese.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="kl">
+         <xs:enumeration value="jv">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Kalaallisut or Greenlandic.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Javanese.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="kn">
+         <xs:enumeration value="ka">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Kannada.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="ks">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Kashmiri.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="kr">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Kanuri.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="kk">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Kazakh.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="km">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Khmer.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="ki">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Kikuyu or Gikuyu.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="rw">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Kinyarwanda.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="ky">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Kirghiz.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="kv">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Komi.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Georgian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="kg">
@@ -472,9 +401,9 @@
                <xs:documentation source="ddex:Definition">Kongo.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="ko">
+         <xs:enumeration value="ki">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Korean.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Kikuyu or Gikuyu.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="kj">
@@ -482,14 +411,59 @@
                <xs:documentation source="ddex:Definition">Kuanyama or Kwanyama.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
+         <xs:enumeration value="kk">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Kazakh.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="kl">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Kalaallisut or Greenlandic.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="km">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Central Khmer.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="kn">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Kannada.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="ko">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Korean.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="kr">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Kanuri.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="ks">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Kashmiri.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
          <xs:enumeration value="ku">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Kurdish.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="lo">
+         <xs:enumeration value="kv">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Lao.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Komi.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="kw">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Cornish.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="ky">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Kirghiz or Kyrgyz.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="la">
@@ -497,9 +471,14 @@
                <xs:documentation source="ddex:Definition">Latin.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="lv">
+         <xs:enumeration value="lb">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Latvian.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Luxembourgish or Letzeburgesch.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="lg">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Ganda.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="li">
@@ -512,14 +491,14 @@
                <xs:documentation source="ddex:Definition">Lingala.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
+         <xs:enumeration value="lo">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Lao.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
          <xs:enumeration value="lt">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Lithuanian.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="lb">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Luxembourgish or Letzeburgesch.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="lu">
@@ -527,14 +506,14 @@
                <xs:documentation source="ddex:Definition">Luba-Katanga.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="lg">
+         <xs:enumeration value="lv">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Ganda.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Latvian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="mk">
+         <xs:enumeration value="mg">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Macedonian.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Malagasy.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="mh">
@@ -542,14 +521,29 @@
                <xs:documentation source="ddex:Definition">Marshallese.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
+         <xs:enumeration value="mi">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Maori.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="mk">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Macedonian.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
          <xs:enumeration value="ml">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Malayalam.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="mi">
+         <xs:enumeration value="mn">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Maori.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Mongolian.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="mo">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Moldavian. This code has been withdrawn, recommending the code 'ro' also for Moldavian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="mr">
@@ -562,24 +556,14 @@
                <xs:documentation source="ddex:Definition">Malay.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="mg">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Malagasy.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
          <xs:enumeration value="mt">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Maltese.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="mo">
+         <xs:enumeration value="my">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Moldavian.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="mn">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Mongolian.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Burmese.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="na">
@@ -587,14 +571,9 @@
                <xs:documentation source="ddex:Definition">Nauru.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="nv">
+         <xs:enumeration value="nb">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Navajo or Navaho.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="nr">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">South Ndebele.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Norwegian Bokmål</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="nd">
@@ -602,14 +581,19 @@
                <xs:documentation source="ddex:Definition">North Ndebele.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
+         <xs:enumeration value="ne">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Nepali.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
          <xs:enumeration value="ng">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Ndonga.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="ne">
+         <xs:enumeration value="nl">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Nepali.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Dutch or Flemish.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="nn">
@@ -617,14 +601,19 @@
                <xs:documentation source="ddex:Definition">Norwegian Nynorsk.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="nb">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Norwegian Bokmål</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
          <xs:enumeration value="no">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Norwegian.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="nr">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">South Ndebele.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="nv">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Navajo or Navaho.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="ny">
@@ -634,7 +623,7 @@
          </xs:enumeration>
          <xs:enumeration value="oc">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Occitan (post 1500) or Provençal.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Occitan (post 1500).</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="oj">
@@ -642,14 +631,14 @@
                <xs:documentation source="ddex:Definition">Ojibwa.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="or">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Oriya.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
          <xs:enumeration value="om">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Oromo.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="or">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Oriya.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="os">
@@ -672,14 +661,14 @@
                <xs:documentation source="ddex:Definition">Polish.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
+         <xs:enumeration value="ps">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Pushto or Pashto.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
          <xs:enumeration value="pt">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Portuguese.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="ps">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Pushto.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="qu">
@@ -689,12 +678,7 @@
          </xs:enumeration>
          <xs:enumeration value="rm">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Raeto-Romance.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="ro">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Romanian.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Romansh.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="rn">
@@ -702,14 +686,19 @@
                <xs:documentation source="ddex:Definition">Rundi.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
+         <xs:enumeration value="ro">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Romanian.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
          <xs:enumeration value="ru">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Russian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="sg">
+         <xs:enumeration value="rw">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Sango.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Kinyarwanda.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="sa">
@@ -717,14 +706,29 @@
                <xs:documentation source="ddex:Definition">Sanskrit.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="sr">
+         <xs:enumeration value="sc">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Serbian.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Sardinian.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="sd">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Sindhi.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="se">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Northern Sami.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="sg">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Sango.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="si">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Sinhalese.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Sinhala or Sinhalese.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="sk">
@@ -737,11 +741,6 @@
                <xs:documentation source="ddex:Definition">Slovenian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="se">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Northern Sami.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
          <xs:enumeration value="sm">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Samoan.</xs:documentation>
@@ -752,29 +751,19 @@
                <xs:documentation source="ddex:Definition">Shona.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="sd">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Sindhi.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
          <xs:enumeration value="so">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Somali.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="st">
+         <xs:enumeration value="sq">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Southern Sotho.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Albanian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="es">
+         <xs:enumeration value="sr">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Spanish or Castilian.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="sc">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Sardinian.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Serbian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="ss">
@@ -782,14 +771,14 @@
                <xs:documentation source="ddex:Definition">Swati.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
+         <xs:enumeration value="st">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Southern Sotho.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
          <xs:enumeration value="su">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Sundanese.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="sw">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Swahili.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="sv">
@@ -797,19 +786,14 @@
                <xs:documentation source="ddex:Definition">Swedish.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="ty">
+         <xs:enumeration value="sw">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Tahitian.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Swahili.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="ta">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Tamil.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="tt">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Tatar.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="te">
@@ -822,11 +806,6 @@
                <xs:documentation source="ddex:Definition">Tajik.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="tl">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Tagalog.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
          <xs:enumeration value="th">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Thai.</xs:documentation>
@@ -837,9 +816,14 @@
                <xs:documentation source="ddex:Definition">Tigrinya.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="to">
+         <xs:enumeration value="tk">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Tonga (Tonga Islands).</xs:documentation>
+               <xs:documentation source="ddex:Definition">Turkmen.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="tl">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Tagalog.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="tn">
@@ -847,14 +831,9 @@
                <xs:documentation source="ddex:Definition">Tswana.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="ts">
+         <xs:enumeration value="to">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">Tsonga.</xs:documentation>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="tk">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">Turkmen.</xs:documentation>
+               <xs:documentation source="ddex:Definition">Tonga (Tonga Islands).</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="tr">
@@ -862,9 +841,24 @@
                <xs:documentation source="ddex:Definition">Turkish.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
+         <xs:enumeration value="ts">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Tsonga.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="tt">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Tatar.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
          <xs:enumeration value="tw">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Twi.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="ty">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Tahitian.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="ug">
@@ -930,6 +924,11 @@
          <xs:enumeration value="za">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">Zhuang or Chuang.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="zh">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Chinese.</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="zu">

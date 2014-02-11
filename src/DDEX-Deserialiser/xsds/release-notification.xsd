@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ern="http://ddex.net/xml/ern/341"
-           xmlns:ddexC="http://ddex.net/xml/20120404/ddexC"
-           xmlns:ddex="http://ddex.net/xml/20120404/ddex"
-           xmlns:iso639a2="http://ddex.net/xml/20120404/iso639a2"
-           xmlns:iso4217a="http://ddex.net/xml/20120404/iso4217a"
-           xmlns:iso3166a2="http://ddex.net/xml/20120404/iso3166a2"
-           targetNamespace="http://ddex.net/xml/ern/341"
-           elementFormDefault="unqualified"
-           attributeFormDefault="unqualified">
-   <xs:import namespace="http://ddex.net/xml/20120404/ddexC"  schemaLocation="http://ddex.net/xml/20120404/ddexC.xsd"/>
-   <xs:import namespace="http://ddex.net/xml/20120404/ddex"  schemaLocation="http://ddex.net/xml/20120404/ddex.xsd"/>
-   <xs:import namespace="http://ddex.net/xml/20120404/iso639a2"  schemaLocation="http://ddex.net/xml/20120404/iso639a2.xsd"/>
-   <xs:import namespace="http://ddex.net/xml/20120404/iso4217a"  schemaLocation="http://ddex.net/xml/20120404/iso4217a.xsd"/>
- <xs:import namespace="http://ddex.net/xml/20120404/iso3166a2"  schemaLocation="http://ddex.net/xml/20120404/iso3166a2.xsd"/> 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ern="http://ddex.net/xml/ern/351"
+   xmlns:ddexC="http://ddex.net/xml/20121219/ddexC" xmlns:ddex="http://ddex.net/xml/20121219/ddex"
+   xmlns:iso639a2="http://ddex.net/xml/20121219/iso639a2"
+   xmlns:iso4217a="http://ddex.net/xml/20121219/iso4217a"
+   xmlns:iso3166a2="http://ddex.net/xml/20121219/iso3166a2"
+   targetNamespace="http://ddex.net/xml/ern/351" elementFormDefault="unqualified"
+   attributeFormDefault="unqualified">
+   <xs:import namespace="http://ddex.net/xml/20121219/ddexC" schemaLocation="ddexC.xsd"/>
+   <xs:import namespace="http://ddex.net/xml/20121219/ddex" schemaLocation="ddex.xsd"/>
+   <xs:import namespace="http://ddex.net/xml/20121219/iso639a2" schemaLocation="iso639a2.xsd"/>
+   <xs:import namespace="http://ddex.net/xml/20121219/iso4217a" schemaLocation="iso4217a.xsd"/>
+   <xs:import namespace="http://ddex.net/xml/20121219/iso3166a2" schemaLocation="iso3166a2.xsd"/>
    <xs:annotation>
       <xs:documentation>© 2006-2012 Digital Data Exchange, LLC (DDEX)</xs:documentation>
    </xs:annotation>
@@ -30,6 +28,11 @@
             <xs:element name="UpdateIndicator" type="ddex:UpdateIndicator">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">The indicator which distinguishes whether the ddex:Message contains original data or updates to previously sent data.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+            <xs:element name="IsBackfill" type="xs:boolean" minOccurs="0">
+               <xs:annotation>
+                  <xs:documentation source="ddex:Definition">A ddex:Flag indicating whether the ern:NewReleaseMessage is sent as part of a backfill activity (as opposed to providing ongoing deliveries of frontline ddex:Releases) (=True) or not (=False). When this element is not present, the context is assumed to be False.</xs:documentation>
                </xs:annotation>
             </xs:element>
             <xs:element name="CatalogTransfer" minOccurs="0" type="ern:CatalogTransfer">
@@ -239,7 +242,8 @@
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:CatalogTransfer applies (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:ExcludedTerritory must be present, but not both. </xs:documentation>
                </xs:annotation>
             </xs:element>
-            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded" type="ddexC:TerritoryCode">
+            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded"
+               type="ddexC:TerritoryCode">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:CatalogTransfer does not apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:Territory must be present, but not both.</xs:documentation>
                </xs:annotation>
@@ -257,6 +261,42 @@
          </xs:element>
       </xs:sequence>
    </xs:complexType>
+   <xs:complexType name="Character">
+      <xs:annotation>
+         <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Character. A ddex:Character may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:choice>
+            <xs:element name="PartyId" type="ddexC:PartyId">
+               <xs:annotation>
+                  <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:PartyId for the ddex:Party. If no ddex:Namespace is given, the ddex:Identifier is a ddex:DdexPartyId (DPID). Note that DPIDs are not normally used to identify ddex:Artists, ddex:Producers or other ddex:Creators.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+            <xs:sequence>
+               <xs:element name="PartyName" maxOccurs="unbounded" type="ddexC:PartyName">
+                  <xs:annotation>
+                     <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the PartyName(s).</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="PartyId" minOccurs="0" type="ddexC:PartyId">
+                  <xs:annotation>
+                     <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:PartyId for the ddex:Party. If no ddex:Namespace is given, the ddex:Identifier is a ddex:DdexPartyId (DPID). Note that DPIDs are not normally used to identify ddex:Artists, ddex:Producers or other ddex:Creators.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:choice>
+         <xs:element name="ResourceContributor" minOccurs="0" type="ern:ResourceContributor">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:Name, ddex:Identifier and role(s) of a ddex:Contributor.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="SequenceNumber" type="xs:integer">
+         <xs:annotation>
+            <xs:documentation source="ddex:Definition">The number indicating the order of the ddexC:Character in a group of ddex:Characters. This is represented in an XML schema as an XML ddex:Attribute. </xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
    <xs:complexType name="Collection">
       <xs:annotation>
          <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Collection. ddex:Collections referenced from ddex:Video ddex:Resources are of ddex:CollectionType ddex:VideoChapter . ddex:Collections referenced from a ddex:Release composite are of ddex:CollectionType ddex:Series, ddex:Season or ddex:Episode.</xs:documentation>
@@ -268,7 +308,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="CollectionType" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:CollectionType">
+            type="ddexC:CollectionType">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:Type of the ddex:Collection.</xs:documentation>
             </xs:annotation>
@@ -289,18 +329,18 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="Contributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ResourceContributor">
+            type="ern:ResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details a ddex:Contributor to the ddex:Collection.</xs:documentation>
             </xs:annotation>
          </xs:element>
-         <xs:element name="Character" minOccurs="0" maxOccurs="unbounded" type="ddexC:Character">
+         <xs:element name="Character" minOccurs="0" maxOccurs="unbounded" type="ern:Character">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Character in the ddex:Collection. A ddex:Character may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="CollectionCollectionReferenceList" minOccurs="0"
-                     type="ddexC:CollectionCollectionReferenceList">
+            type="ddexC:CollectionCollectionReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing a list of ddex:CollectionCollectionReferences for a ddex:Collection (specific to this ddex:Message).</xs:documentation>
             </xs:annotation>
@@ -336,19 +376,19 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="CollectionDetailsByTerritory" minOccurs="0" maxOccurs="unbounded"
-                     type="ern:CollectionDetailsByTerritory">
+            type="ern:CollectionDetailsByTerritory">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:Descriptors and other attributes of the ddex:Collection which may vary according to ddex:Territory of release.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="CollectionResourceReferenceList" minOccurs="0"
-                     type="ern:CollectionResourceReferenceList">
+            type="ern:CollectionResourceReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing a list of ddex:CollectionResourceReferences for a ddex:Resource (specific to this ddex:Message).</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="CollectionWorkReferenceList" minOccurs="0"
-                     type="ern:CollectionWorkReferenceList">
+            type="ern:CollectionWorkReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing a list of ddex:CollectionWorkReferences for a ddex:Work (specific to this ddex:Message).</xs:documentation>
             </xs:annotation>
@@ -391,7 +431,8 @@
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:Collection details apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:ExcludedTerritory shall be present, but not both. </xs:documentation>
                </xs:annotation>
             </xs:element>
-            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded" type="ddexC:TerritoryCode">
+            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded"
+               type="ddexC:TerritoryCode">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:Collection details do not apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:Territory shall be present, but not both.</xs:documentation>
                </xs:annotation>
@@ -403,7 +444,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="Contributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ResourceContributor">
+            type="ern:ResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Contributor to the ddex:Collection.</xs:documentation>
             </xs:annotation>
@@ -413,7 +454,7 @@
                <xs:documentation source="ddex:Definition">The ddex:Flag indicating whether the ddex:Collection is complete (=True) or not (=False). Only one of the Elements ddex:IsComplete here and in the Collection is valid for a given Collection.</xs:documentation>
             </xs:annotation>
          </xs:element>
-         <xs:element name="Character" minOccurs="0" maxOccurs="unbounded" type="ddexC:Character">
+         <xs:element name="Character" minOccurs="0" maxOccurs="unbounded" type="ern:Character">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Character in the ddex:Collection. A ddex:Character may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
             </xs:annotation>
@@ -465,7 +506,7 @@
       </xs:annotation>
       <xs:sequence>
          <xs:element name="CollectionResourceReference" maxOccurs="unbounded"
-                     type="ern:CollectionResourceReference">
+            type="ern:CollectionResourceReference">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing a ddex:CollectionResourceReference for a ddex:Collection (specific to this ddex:Message).</xs:documentation>
             </xs:annotation>
@@ -500,7 +541,7 @@
       </xs:annotation>
       <xs:sequence>
          <xs:element name="CollectionWorkReference" maxOccurs="unbounded"
-                     type="ern:CollectionWorkReference">
+            type="ern:CollectionWorkReference">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing a ddex:CollectionWorkReference for a ddex:Collection (specific to this ddex:Message).</xs:documentation>
             </xs:annotation>
@@ -555,7 +596,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="CueVisualPerceptionType" minOccurs="0"
-                     type="ddexC:CueVisualPerceptionType">
+            type="ddexC:CueVisualPerceptionType">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:VisualPerceptionType for the ddex:Creation referenced in the ddexC:Cue.</xs:documentation>
             </xs:annotation>
@@ -567,7 +608,7 @@
          </xs:element>
          <xs:choice>
             <xs:element name="CueCreationReference" maxOccurs="unbounded"
-                        type="ddexC:CueCreationReference">
+               type="ddexC:CueCreationReference">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Composite containing a ddex:CueCreationReference for a ddex:Creation (specific to this ddex:Message).</xs:documentation>
                </xs:annotation>
@@ -584,19 +625,19 @@
                   </xs:annotation>
                </xs:element>
                <xs:element name="ReferencedCreationTitle" minOccurs="0" maxOccurs="unbounded"
-                           type="ddexC:Title">
+                  type="ddexC:Title">
                   <xs:annotation>
                      <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Title of the ddex:Creation referenced in the ddexC:Cue.</xs:documentation>
                   </xs:annotation>
                </xs:element>
                <xs:element name="ReferencedCreationContributor" minOccurs="0" maxOccurs="unbounded"
-                           type="ddexC:ResourceContributor">
+                  type="ern:ResourceContributor">
                   <xs:annotation>
                      <xs:documentation source="ddex:Definition">A ddex:Composite containing details a ddex:Contributor of the ddex:Creation referenced in the ddexC:Cue.</xs:documentation>
                   </xs:annotation>
                </xs:element>
                <xs:element name="ReferencedCreationCharacter" minOccurs="0" maxOccurs="unbounded"
-                           type="ddexC:Character">
+                  type="ern:Character">
                   <xs:annotation>
                      <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Character in the ddex:Creation referenced in the ddexC:Cue. A ddex:Character may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
                   </xs:annotation>
@@ -641,7 +682,7 @@
       </xs:annotation>
       <xs:sequence>
          <xs:element name="CueSheetId" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ProprietaryId">
+            type="ddexC:ProprietaryId">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:CueSheetId of the ddexC:CueSheet.</xs:documentation>
             </xs:annotation>
@@ -686,7 +727,7 @@
       </xs:annotation>
       <xs:sequence>
          <xs:element name="DealReference" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:DealReference">
+            type="ddexC:DealReference">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing a ddex:Reference to a ddex:TextDocument containing details of the ern:Deal (in the form of an ddex:Identifier, ddex:Name or ddex:Description).</xs:documentation>
             </xs:annotation>
@@ -702,13 +743,13 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="DealTechnicalResourceDetailsReferenceList" minOccurs="0"
-                     type="ern:DealTechnicalResourceDetailsReferenceList">
+            type="ern:DealTechnicalResourceDetailsReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing a list of ddex:DealTechnicalResourceDetailsReferences for the ern:Deal.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="DistributionChannelPage" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:WebPage">
+            type="ddexC:WebPage">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:WebPage for the ddex:DistributionChannel.</xs:documentation>
             </xs:annotation>
@@ -760,7 +801,7 @@
       </xs:annotation>
       <xs:sequence>
          <xs:element name="CommercialModelType" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:CommercialModelType">
+            type="ddexC:CommercialModelType">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the fundamental business model which applies to the ddex:Deal (e.g. ddex:SubscriptionModel and ddex:PayAsYouGoModel). The ddex:CommercialModelType indicates how the ddex:Consumer pays for the ddex:Service or ddex:Release.</xs:documentation>
             </xs:annotation>
@@ -788,7 +829,8 @@
                   <xs:documentation source="ddex:Definition">A ddex:Territory in which the ddex:Deal applies (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:ExcludedTerritory must be present, but not both. </xs:documentation>
                </xs:annotation>
             </xs:element>
-            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded" type="ddexC:TerritoryCode">
+            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded"
+               type="ddexC:TerritoryCode">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Territory in which the ddex:Deal does not apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:Territory must be present, but not both.</xs:documentation>
                </xs:annotation>
@@ -807,7 +849,7 @@
             </xs:element>
          </xs:choice>
          <xs:element name="PriceInformation" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:PriceInformation">
+            type="ddexC:PriceInformation">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Price. Note that this ddex:Price applies to all ddex:UseTypes referenced in this ddex:Composite.</xs:documentation>
             </xs:annotation>
@@ -850,7 +892,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="RelatedReleaseOfferSet" minOccurs="0" maxOccurs="unbounded"
-                     type="ern:RelatedReleaseOfferSet">
+            type="ern:RelatedReleaseOfferSet">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of one or more offers related to the ddex:Release.</xs:documentation>
             </xs:annotation>
@@ -866,7 +908,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="RightsClaimPolicy" minOccurs="0" maxOccurs="unbounded"
-                     type="ern:RightsClaimPolicy">
+            type="ern:RightsClaimPolicy">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a rights claim policy.</xs:documentation>
             </xs:annotation>
@@ -924,7 +966,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="ImageDetailsByTerritory" maxOccurs="unbounded"
-                     type="ern:ImageDetailsByTerritory">
+            type="ern:ImageDetailsByTerritory">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ern:Image which may vary according to ddex:Territory of release.</xs:documentation>
             </xs:annotation>
@@ -952,20 +994,21 @@
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:Image details apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:ExcludedTerritory shall be present, but not both.</xs:documentation>
                </xs:annotation>
             </xs:element>
-            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded" type="ddexC:TerritoryCode">
+            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded"
+               type="ddexC:TerritoryCode">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:Image details do not apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:Territory shall be present, but not both.</xs:documentation>
                </xs:annotation>
             </xs:element>
          </xs:choice>
          <xs:element name="ResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ResourceContributor">
+            type="ern:ResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Contributor to the ddex:Image.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="IndirectResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:IndirectResourceContributor">
+            type="ddexC:IndirectResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of an indirect ddex:Contributor to the ddex:Image.</xs:documentation>
             </xs:annotation>
@@ -1011,13 +1054,13 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="ParentalWarningType" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ParentalWarningType">
+            type="ddexC:ParentalWarningType">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the classification of the ddex:Image according to advice which it carries about the level of explicitness or offensiveness of its content.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="TechnicalImageDetails" minOccurs="0" maxOccurs="unbounded"
-                     type="ern:TechnicalImageDetails">
+            type="ern:TechnicalImageDetails">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing technical details of the ddex:Image.</xs:documentation>
             </xs:annotation>
@@ -1050,7 +1093,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="IndirectMidiId" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:MusicalWorkId">
+            type="ddexC:MusicalWorkId">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:MusicalWorkId of a ddex:MusicalWork used in the ern:MIDI.</xs:documentation>
             </xs:annotation>
@@ -1141,13 +1184,13 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="ResourceMusicalWorkReferenceList" minOccurs="0"
-                     type="ddexC:ResourceMusicalWorkReferenceList">
+            type="ddexC:ResourceMusicalWorkReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of one or more ddex:MusicalWorks contained in the ern:MIDI.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="ResourceContainedResourceReferenceList" minOccurs="0"
-                     type="ddexC:ResourceContainedResourceReferenceList">
+            type="ddexC:ResourceContainedResourceReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:ResourceContainedResourceReferences referring to a ddex:Resource that is contained in the current ern:MIDI.</xs:documentation>
             </xs:annotation>
@@ -1163,7 +1206,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="MidiDetailsByTerritory" maxOccurs="unbounded"
-                     type="ern:MidiDetailsByTerritory">
+            type="ern:MidiDetailsByTerritory">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:Descriptors and other attributes of the ern:MIDI which may vary according to ddex:Territory of release. </xs:documentation>
             </xs:annotation>
@@ -1191,7 +1234,8 @@
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:MIDI details apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:ExcludedTerritory shall be present, but not both. </xs:documentation>
                </xs:annotation>
             </xs:element>
-            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded" type="ddexC:TerritoryCode">
+            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded"
+               type="ddexC:TerritoryCode">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:MIDI details do not apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:Territory shall be present, but not both.</xs:documentation>
                </xs:annotation>
@@ -1208,13 +1252,13 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="ResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ResourceContributor">
+            type="ern:ResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Contributor to the ddex:MIDI.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="IndirectResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:IndirectResourceContributor">
+            type="ddexC:IndirectResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of an indirect ddex:Contributor to the ddex:MIDI.</xs:documentation>
             </xs:annotation>
@@ -1230,7 +1274,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="RightsController" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:RightsController">
+            type="ern:RightsController">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:RightsController of Rights in the ddex:MIDI.</xs:documentation>
             </xs:annotation>
@@ -1261,7 +1305,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="HostSoundCarrier" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:HostSoundCarrier">
+            type="ddexC:HostSoundCarrier">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:HostSoundCarrier on which the ddex:MIDI appears (e.g., the CD on which it was originally released). This ddex:Composite exists in the Release Notification Message Suite Standard, to support the identification and matching of ddex:MIDI information.</xs:documentation>
             </xs:annotation>
@@ -1277,7 +1321,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="ParentalWarningType" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ParentalWarningType">
+            type="ddexC:ParentalWarningType">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the classification of the ddex:MIDI according to advice which it carries about the level of explicitness or offensiveness of its content.</xs:documentation>
             </xs:annotation>
@@ -1298,7 +1342,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="TechnicalMidiDetails" minOccurs="0" maxOccurs="unbounded"
-                     type="ern:TechnicalMidiDetails">
+            type="ern:TechnicalMidiDetails">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing technical details of the ddex:MIDI.</xs:documentation>
             </xs:annotation>
@@ -1404,13 +1448,13 @@
             </xs:simpleType>
          </xs:element>
          <xs:element name="ExternalResourceLink" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ExternalResourceLink">
+            type="ddexC:ExternalResourceLink">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of promotional or other material related to the ern:Release.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="SalesReportingProxyReleaseId" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:SalesReportingProxyReleaseId">
+            type="ddexC:SalesReportingProxyReleaseId">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the A ddex:Composite containing details of the ddex:SalesReportingProxyReleaseId.</xs:documentation>
             </xs:annotation>
@@ -1421,7 +1465,8 @@
             </xs:annotation>
          </xs:element>
          <xs:choice>
-            <xs:element name="ReleaseResourceReferenceList" type="ddexC:ReleaseResourceReferenceList">
+            <xs:element name="ReleaseResourceReferenceList"
+               type="ddexC:ReleaseResourceReferenceList">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Composite containing details of one or more ddex:Resources contained in the ern:Release.</xs:documentation>
                </xs:annotation>
@@ -1433,7 +1478,7 @@
             </xs:element>
          </xs:choice>
          <xs:element name="ReleaseCollectionReferenceList" minOccurs="0"
-                     type="ddexC:ReleaseCollectionReferenceList">
+            type="ddexC:ReleaseCollectionReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of one or more ddex:Collections contained in the ern:Release.</xs:documentation>
             </xs:annotation>
@@ -1444,7 +1489,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="ReleaseDetailsByTerritory" maxOccurs="unbounded"
-                     type="ern:ReleaseDetailsByTerritory">
+            type="ern:ReleaseDetailsByTerritory">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:Descriptors and other attributes of the ern:Release which may vary according to ddex:Territory of release.</xs:documentation>
             </xs:annotation>
@@ -1470,15 +1515,30 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="ArtistProfilePage" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:WebPage">
+            type="ddexC:WebPage">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:WebPage for the ddex:Artist.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="GlobalReleaseDate" minOccurs="0" type="ddexC:EventDate">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the Date of the ddex:Event in which the ddex:Release was or will be first made globally available for Usage in its current form, whether for physical or electronic/online distribution (in ISO 8601:2004 format: YYYY-MM-DD).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="GlobalOriginalReleaseDate" minOccurs="0" type="ddexC:EventDate">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the Date of the ddex:Event in which the collection of tracks for the ddex:Release (e.g. the equivalent physical album on vinyl) was or will be first made globally available for Usage, whether for physical or electronic/online distribution (in ISO 8601:2004 format: YYYY-MM-DD).</xs:documentation>
             </xs:annotation>
          </xs:element>
       </xs:sequence>
       <xs:attribute name="LanguageAndScriptCode" type="xs:string">
          <xs:annotation>
             <xs:documentation source="ddex:Definition">The ddex:Language and script for the ddex:Elements of the ern:Release as defined in IETF RfC 4646. The default is the same as indicated for the containing composite. ddex:Language and Script are provided as lang[-scipt][-region][-variant].  This is represented in an XML schema as an XML ddex:Attribute.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="IsMainRelease" type="xs:boolean">
+         <xs:annotation>
+            <xs:documentation source="ddex:Definition">The ddex:Flag indicating whether the ddex:Release is a main one as defined in the relevant Profile Standard (=True) or not (=False). This is represented in an XML schema as an XML ddex:Attribute.</xs:documentation>
          </xs:annotation>
       </xs:attribute>
    </xs:complexType>
@@ -1525,7 +1585,8 @@
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddexC:ReleaseSummaryDetailsByTerritory apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:ExcludedTerritory shall be present, but not both.</xs:documentation>
                </xs:annotation>
             </xs:element>
-            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded" type="ddexC:TerritoryCode">
+            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded"
+               type="ddexC:TerritoryCode">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddexC:ReleaseSummaryDetailsByTerritory do not apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:Territory shall be present, but not both.</xs:documentation>
                </xs:annotation>
@@ -1562,7 +1623,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="AdministratingRecordCompany" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:AdministratingRecordCompany">
+            type="ddexC:AdministratingRecordCompany">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:AdministratingRecordCompany for the ddex:Release. </xs:documentation>
             </xs:annotation>
@@ -1573,13 +1634,13 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="RelatedRelease" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:RelatedRelease">
+            type="ddexC:RelatedRelease">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Release (or a ddex:PhysicalProduct or a ddex:DigitalProduct derived from such a ddex:Release) which is related to this ddex:Release.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="ParentalWarningType" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ParentalWarningType">
+            type="ddexC:ParentalWarningType">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the classification of the ddex:Release according to advice which it carries about the level of explicitness or offensiveness of its content.</xs:documentation>
             </xs:annotation>
@@ -1595,7 +1656,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="ResourceGroup" minOccurs="0" maxOccurs="unbounded"
-                     type="ern:ResourceGroup">
+            type="ern:ResourceGroup">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a group of some or all of the ddex:Resources in the ddex:Release. ResourceGroups are used to signal groupings or sequences of ddex:Resources within a ddex:Release. Examples include individual carriers in a multi-carrier ddex:Release or classical ddex:Work groupings as well as the default order of ddex:Resources within a ddex:Release.</xs:documentation>
             </xs:annotation>
@@ -1605,9 +1666,14 @@
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Genre to which the ddex:Release belongs.</xs:documentation>
             </xs:annotation>
          </xs:element>
+         <xs:element name="ReleaseDate" minOccurs="0" type="ddexC:EventDate">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the Date and ddex:Place of the ddex:Event in which the ddex:Release was or will be first made available for Usage in its current form, whether for physical or electronic/online distribution (in ISO 8601:2004 format: YYYY-MM-DD).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
          <xs:element name="OriginalReleaseDate" minOccurs="0" type="ddexC:EventDate">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the Date and ddex:Place of the ddex:Event in which the ddex:Release was or will be first made available for Usage, whether for physical or electronic/online distribution (in ISO 8601:2004 format: YYYY-MM-DD).</xs:documentation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the Date and ddex:Place of the ddex:Event in which the collection of tracks for the ddex:Release (e.g. the equivalent physical album on vinyl) was or will be first made available for Usage, whether for physical or electronic/online distribution (in ISO 8601:2004 format: YYYY-MM-DD).</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="OriginalDigitalReleaseDate" minOccurs="0" type="ddexC:EventDate">
@@ -1617,7 +1683,7 @@
          </xs:element>
          <xs:choice minOccurs="0">
             <xs:element name="FileAvailabilityDescription" maxOccurs="unbounded"
-                        type="ddexC:Description">
+               type="ddexC:Description">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Composite containing a ddex:Description providing details of how a ddex:DSP can obtain any related ddex:Release ddex:File.</xs:documentation>
                </xs:annotation>
@@ -1638,7 +1704,7 @@
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Synopsis of the ddex:Release.</xs:documentation>
             </xs:annotation>
          </xs:element>
-         <xs:element name="Character" minOccurs="0" maxOccurs="unbounded" type="ddexC:Character">
+         <xs:element name="Character" minOccurs="0" maxOccurs="unbounded" type="ern:Character">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Character in the ddex:Release. A ddex:Character may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
             </xs:annotation>
@@ -1646,6 +1712,11 @@
          <xs:element name="NumberOfUnitsPerPhysicalRelease" minOccurs="0" type="xs:integer">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A number of units (typically a CD or a DVD) contained in a physical ddex:Release. This Element is for boxed sets.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="DisplayConductor" minOccurs="0" maxOccurs="unbounded" type="ddexC:Artist">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:DisplayConductor for the ddex:Release. A ddex:DisplayConductor may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
             </xs:annotation>
          </xs:element>
       </xs:sequence>
@@ -1672,6 +1743,126 @@
          </xs:annotation>
       </xs:attribute>
    </xs:complexType>
+   <xs:complexType name="ResourceContributor">
+      <xs:annotation>
+         <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:Name, ddex:Identifier and role(s) of a ddex:Contributor to a ddex:Resource.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:choice>
+            <xs:element name="PartyId" type="ddexC:PartyId">
+               <xs:annotation>
+                  <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:PartyId for the ddex:Party. If no ddex:Namespace is given, the ddex:Identifier is a ddex:DdexPartyId (DPID). Note that DPIDs are not normally used to identify ddex:Artists, ddex:Producers or other ddex:Creators.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+            <xs:sequence>
+               <xs:element name="PartyName" maxOccurs="unbounded" type="ddexC:PartyName">
+                  <xs:annotation>
+                     <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the PartyName(s).</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="PartyId" minOccurs="0" type="ddexC:PartyId">
+                  <xs:annotation>
+                     <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:PartyId for the ddex:Party. If no ddex:Namespace is given, the ddex:Identifier is a ddex:DdexPartyId (DPID). Note that DPIDs are not normally used to identify ddex:Artists, ddex:Producers or other ddex:Creators.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:choice>
+         <xs:element name="ResourceContributorRole" minOccurs="0" maxOccurs="unbounded"
+            type="ddexC:ResourceContributorRole">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a role played by the ddex:Contributor.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="IsFeaturedArtist" minOccurs="0" type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Flag indicating whether the ddex:Contributor is a featured ddex:Artist (=True) or not (=False).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="IsContractedArtist" minOccurs="0" type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Flag indicating whether the ddex:Contributor is an ddex:Artist that has a contract for its part in creating the ddex:Resource (=True) or not (=False).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="TerritoryOfPerformance" minOccurs="0" maxOccurs="unbounded"
+            type="ddexC:TerritoryCode">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A country of performance (represented by an ISO 3166-1 iso3166a2:TerritoryCode).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="InstrumentType" minOccurs="0" maxOccurs="unbounded" type="xs:string">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Type of musical instrument played by the ddex:Artist.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ArtistDelegatedUsageRights" minOccurs="0"
+            type="ddexC:ArtistDelegatedUsageRights">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the kinds of usage for which rights have been delegated by the ddex:Artist.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="Sex" minOccurs="0" type="ddex:Sex">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">Sex</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="DateAndPlaceOfBirth" minOccurs="0" type="ddexC:EventDate">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the Date and ddex:Place of birth.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="DateAndPlaceOfDeath" minOccurs="0" type="ddexC:EventDate">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the Date and ddex:Place of death.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="PrimaryRole" minOccurs="0" type="ddexC:ArtistRole">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the primary role played by the ddex:Artist in relation to other ddex:Artists.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="PrimaryInstrumentType" minOccurs="0" type="xs:string">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Type of (musical) instrument primarily played by the ddex:Artist.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="GoverningAgreementType" minOccurs="0" type="ddexC:GoverningAgreementType">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Type of an agreement that covers the ddex:Artist's participation in making a ddex:SoundRecording.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ContactInformation" minOccurs="0" type="ddexC:ContactId">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of contact ddex:Identifiers of the ddex:Artist.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="TerritoryOfResidency" minOccurs="0" type="ddexC:TerritoryCode">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The country of main residency of the ddex:Artist (represented by an ISO 3166-1 iso3166a2:TerritoryCode).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="AdditionalRoles" minOccurs="0" maxOccurs="unbounded"
+            type="ddexC:ArtistRole">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the additional roles played by the ddex:Artist.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="Genre" minOccurs="0" maxOccurs="unbounded" type="ddexC:Genre">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a typical or main ddex:Genre relating to the ddex:Artist.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="Membership" minOccurs="0" maxOccurs="unbounded" type="ddexC:Membership">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a membership in a collective rights management organization.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="SequenceNumber" type="xs:integer">
+         <xs:annotation>
+            <xs:documentation source="ddex:Definition">The number indicating the order of the ddexC:ResourceContributor in a group of ResourceContributors that have contributed to a ddex:Resource. This is represented in an XML schema as an XML ddex:Attribute. </xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
    <xs:complexType name="ResourceGroup">
       <xs:annotation>
          <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:ResourceGroup. ResourceGroups are used to signal groupings or sequences of ddex:Resources within a ddex:Release. Examples include individual carriers in a multi-carrier ddex:Release or classical ddex:Work groupings as well as the default order of ddex:Resources within a ddex:Release.</xs:documentation>
@@ -1692,33 +1883,43 @@
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:DisplayArtist for the ern:ResourceGroup. The ddex:DisplayArtist may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
             </xs:annotation>
          </xs:element>
+         <xs:element name="DisplayConductor" minOccurs="0" maxOccurs="unbounded" type="ddexC:Artist">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:DisplayConductor for the ern:ResourceGroup. A ddex:DisplayConductor may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="DisplayComposer" minOccurs="0" maxOccurs="unbounded" type="ddexC:Artist">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:DisplayComposer for the ern:ResourceGroup. A ddex:DisplayComposer may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
          <xs:element name="ResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ResourceContributor">
+            type="ern:ResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Contributor to this ern:ResourceGroup. This includes roles such as the compiler of the ern:ResourceGroup, and may summarize details of ddex:Contributors to individual ddex:SoundRecordings or other content.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="IndirectResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:IndirectResourceContributor">
+            type="ddexC:IndirectResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of an indirect ddex:Contributor to this ern:ResourceGroup.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="ResourceGroup" minOccurs="0" maxOccurs="unbounded"
-                     type="ern:ResourceGroup">
+            type="ern:ResourceGroup">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ern:ResourceGroup contained within this ern:ResourceGroup. ResourceGroups are used to signal groupings or sequences of ddex:Resources within a ddex:Release. Examples include individual carriers in a multi-carrier ddex:Release or classical ddex:Work groupings as well as the default order of ddex:Resources within a ddex:Release.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:choice>
             <xs:element name="ResourceGroupContentItem" minOccurs="0" maxOccurs="unbounded"
-                        type="ern:ResourceGroupContentItem">
+               type="ddexC:ResourceGroupContentItem">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Resource contained in the ern:ResourceGroup.</xs:documentation>
                </xs:annotation>
             </xs:element>
             <xs:element name="ResourceGroupResourceReferenceList" minOccurs="0"
-                        type="ddexC:ResourceGroupResourceReferenceList">
+               type="ddexC:ResourceGroupResourceReferenceList">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Resource contained in the ern:ResourceGroup.</xs:documentation>
                </xs:annotation>
@@ -1748,79 +1949,13 @@
          </xs:annotation>
       </xs:attribute>
    </xs:complexType>
-   <xs:complexType name="ResourceGroupContentItem">
-      <xs:annotation>
-         <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Resource which is a ddex:ContentItem of a ddex:ResourceGroup.</xs:documentation>
-      </xs:annotation>
-      <xs:sequence>
-         <xs:element name="SequenceNumber" minOccurs="0" type="xs:integer">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">The number indicating the order of the ddex:ContentItem among all ddex:Resources within this ddex:ResourceGroup. This is analogous to the ddex:Track number on a ddex:SoundCarrier. Not all ddex:ResourceGroups necessarily have ddex:SequenceNumbers (it is most applicable to ddex:SoundRecordings and ddex:MusicalWorkVideos). The ddex:SequenceNumber is unique within its ddex:ResourceGroupLevelNumber.</xs:documentation>
-            </xs:annotation>
-         </xs:element>
-         <xs:element name="SequenceSubNumber" minOccurs="0" type="xs:integer">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">The ddex:SequenceNumber within the ddex:SequenceNumber. Example: if a ddex:Track is subdivided into several numbered sections, these are numbered with a ddex:SequenceSubNumber. The ddex:SequenceSubNumber is unique within its ddex:SequenceNumber.</xs:documentation>
-            </xs:annotation>
-         </xs:element>
-         <xs:element name="ResourceType" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ResourceType">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:Type of the ddex:ContentItem.</xs:documentation>
-            </xs:annotation>
-         </xs:element>
-         <xs:element name="ReleaseResourceReference" type="ddexC:ReleaseResourceReference">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">A ddex:Composite containing a ddex:ReleaseResourceReference for the ddex:ContentItem (specific to this ddex:Message). The ddex:LocalAnchorReference in this ddex:Composite is a xs:string starting with the letter A.</xs:documentation>
-            </xs:annotation>
-         </xs:element>
-         <xs:element name="LinkedReleaseResourceReference" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:LinkedReleaseResourceReference">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:ReleaseResourceReference (specific to this ddex:Message) for a ddex:Resource which is linked to this ddex:ContentItem. Example: an ddex:Image, ddex:Text or ddex:NonMusicalWorkVideo associated with a ddex:SoundRecording. This ddex:LocalAnchorReference is a xs:string starting with the letter A.</xs:documentation>
-            </xs:annotation>
-         </xs:element>
-         <xs:choice minOccurs="0">
-            <xs:element name="ResourceGroupContentItemReleaseReference">
-               <xs:annotation>
-                  <xs:documentation source="ddex:Definition">The ddex:Identifier (specific to the ddex:Message) of a ddex:Release which has the same content as the ern:ResourceGroupContentItem. This is a ddex:LocalReleaseAnchorReference starting with the letter R.</xs:documentation>
-               </xs:annotation>
-               <xs:simpleType>
-                  <xs:restriction base="xs:IDREF">
-                     <xs:pattern value="R[\d\-_a-zA-Z]+"/>
-                  </xs:restriction>
-               </xs:simpleType>
-            </xs:element>
-            <xs:element name="ReleaseId" type="ddexC:ReleaseId">
-               <xs:annotation>
-                  <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:ReleaseIds of a ddex:Release which has the same content as the ern:ResourceGroupContentItem. If available, a ddex:GRid has to be used. If the ddex:Release contains only one ddex:SoundRecording, the ddex:ISRC of the ddex:SoundRecording may be used instead. If the ddex:Release is an abstraction of a complete ddex:PhysicalProduct (such as a CD ddex:Album), the ddex:ICPN of the ddex:PhysicalProduct may be used instead.</xs:documentation>
-               </xs:annotation>
-            </xs:element>
-         </xs:choice>
-         <xs:element name="Duration" minOccurs="0" type="xs:duration">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">The ddex:Duration of the ddex:ContentItem featured, if it is a ddex:SoundRecording or ddex:Video (using the ISO 8601:2004 PT[[hhH]mmM]ssS format, where lower case characters indicate variables, upper case characters are part of the xs:string, e.g. one hour, two minutes and three seconds would be PT1H2M3S). This ddex:Duration may be less than the normal ddex:Duration of the ddex:ContentItem, if only a part of it is included.</xs:documentation>
-            </xs:annotation>
-         </xs:element>
-         <xs:element name="IsHiddenResource" minOccurs="0" type="xs:boolean">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">The ddex:Flag indicating whether a ddex:Resource in a ddex:Release is hidden in some way from the ddex:Consumer (=True) or not (=False).</xs:documentation>
-            </xs:annotation>
-         </xs:element>
-         <xs:element name="IsBonusResource" minOccurs="0" type="xs:boolean">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">The ddex:Flag indicating whether a ddex:Resource in a ddex:Release is additional to those on the original ddex:Release of which this is a ddex:Version (=True) or not (=False).</xs:documentation>
-            </xs:annotation>
-         </xs:element>
-      </xs:sequence>
-   </xs:complexType>
    <xs:complexType name="ResourceList">
       <xs:annotation>
          <xs:documentation source="ddex:Definition">A ddex:Composite containing details of one or more ddex:Resources. ResourceList provides a simple means of aggregating ddex:Resources without any explicit sequencing or grouping: if that is needed it is provided by the ddex:ResourceGroup ddex:Composite. </xs:documentation>
       </xs:annotation>
       <xs:sequence>
          <xs:element name="SoundRecording" minOccurs="0" maxOccurs="unbounded"
-                     type="ern:SoundRecording">
+            type="ern:SoundRecording">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:SoundRecording.</xs:documentation>
             </xs:annotation>
@@ -1856,7 +1991,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="UserDefinedResource" minOccurs="0" maxOccurs="unbounded"
-                     type="ern:UserDefinedResource">
+            type="ern:UserDefinedResource">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:UserDefinedResource.</xs:documentation>
             </xs:annotation>
@@ -1907,6 +2042,75 @@
          </xs:element>
       </xs:sequence>
    </xs:complexType>
+   <xs:complexType name="RightsController">
+      <xs:annotation>
+         <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:RightsController. ddex:RightsControllers are typicallydescribed by ddex:Name, ddex:Identifier and role(s).</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:choice>
+            <xs:element name="PartyId" type="ddexC:PartyId">
+               <xs:annotation>
+                  <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:PartyId for the ddex:Party. If no ddex:Namespace is given, the ddex:Identifier is a ddex:DdexPartyId (DPID). Note that DPIDs are not normally used to identify ddex:Artists, ddex:Producers or other ddex:Creators.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+            <xs:sequence>
+               <xs:element name="PartyName" maxOccurs="unbounded" type="ddexC:PartyName">
+                  <xs:annotation>
+                     <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the PartyName(s).</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="PartyId" minOccurs="0" type="ddexC:PartyId">
+                  <xs:annotation>
+                     <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:PartyId for the ddex:Party. If no ddex:Namespace is given, the ddex:Identifier is a ddex:DdexPartyId (DPID). Note that DPIDs are not normally used to identify ddex:Artists, ddex:Producers or other ddex:Creators.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:choice>
+         <xs:element name="RightsControllerRole" minOccurs="0" maxOccurs="unbounded"
+            type="ddex:RightsControllerRole">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A role that describes the ddex:Party involved in the administration of ddex:Rights.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:choice>
+            <xs:element name="RightShareUnknown" type="xs:boolean">
+               <xs:annotation>
+                  <xs:documentation source="ddex:Definition">The ddex:Flag indicating whether the ddex:RightSharePercentage is unknown (=True) or not (=False).</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+            <xs:element name="RightSharePercentage" type="xs:string">
+               <xs:annotation>
+                  <xs:documentation source="ddex:Definition">The share of the licensed Rights owned by the ddexC:RightsController. ddex:RightShare information is given as a xs:decimal value (e.g. '0.125' represents 12.5%). If no information is given, 100% is assumed.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+         </xs:choice>
+         <xs:element name="RightsControllerType" minOccurs="0" type="ddex:RightsControllerType">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A type of the ddex:RightsController.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="TerritoryOfRegistration" minOccurs="0" type="ddexC:TerritoryCode">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The country of registration (represented by an ISO 3166-1 iso3166a2:TerritoryCode).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="StartDate" type="xs:date">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The Date that marks the beginning of the title (in ISO 8601:2004 format: YYYY-MM-DD). This cannot be a Date in the future.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="EndDate" minOccurs="0" type="xs:date">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The Date that marks the end of the title (in ISO 8601:2004 format: YYYY-MM-DD).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+      <xs:attribute name="SequenceNumber" type="xs:integer">
+         <xs:annotation>
+            <xs:documentation source="ddex:Definition">The number indicating the order of the ddexC:RightsController in a group of ddex:RightsControllers. This is represented in an XML schema as an XML ddex:Attribute. </xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
    <xs:complexType name="SheetMusic">
       <xs:annotation>
          <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:SheetMusic.</xs:documentation>
@@ -1928,7 +2132,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="IndirectSheetMusicId" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:MusicalWorkId">
+            type="ddexC:MusicalWorkId">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:MusicalWorkId of a ddex:MusicalWork used in the ern:SheetMusic.</xs:documentation>
             </xs:annotation>
@@ -1954,13 +2158,13 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="ResourceMusicalWorkReferenceList" minOccurs="0"
-                     type="ddexC:ResourceMusicalWorkReferenceList">
+            type="ddexC:ResourceMusicalWorkReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of one or more ddex:MusicalWorks contained in the ern:SheetMusic.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="ResourceContainedResourceReferenceList" minOccurs="0"
-                     type="ddexC:ResourceContainedResourceReferenceList">
+            type="ddexC:ResourceContainedResourceReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:ResourceContainedResourceReferences referring to a ddex:Resource that is contained in the current ern:SheetMusic.</xs:documentation>
             </xs:annotation>
@@ -1976,7 +2180,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="SheetMusicDetailsByTerritory" maxOccurs="unbounded"
-                     type="ern:SheetMusicDetailsByTerritory">
+            type="ern:SheetMusicDetailsByTerritory">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ern:SheetMusic which may vary according to ddex:Territory of release.</xs:documentation>
             </xs:annotation>
@@ -2004,7 +2208,8 @@
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:SheetMusic details apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:ExcludedTerritory shall be present, but not both.</xs:documentation>
                </xs:annotation>
             </xs:element>
-            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded" type="ddexC:TerritoryCode">
+            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded"
+               type="ddexC:TerritoryCode">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:SheetMusic details do not apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:Territory shall be present, but not both.</xs:documentation>
                </xs:annotation>
@@ -2016,13 +2221,13 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="ResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ResourceContributor">
+            type="ern:ResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Contributor to the ddex:SheetMusic.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="IndirectResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:IndirectResourceContributor">
+            type="ddexC:IndirectResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of an indirect ddex:Contributor to the ddex:SheetMusic.</xs:documentation>
             </xs:annotation>
@@ -2053,13 +2258,13 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="ParentalWarningType" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ParentalWarningType">
+            type="ddexC:ParentalWarningType">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the classification of the ddex:SheetMusic according to advice which it carries about the level of explicitness or offensiveness of its content.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="TechnicalSheetMusicDetails" minOccurs="0" maxOccurs="unbounded"
-                     type="ern:TechnicalSheetMusicDetails">
+            type="ern:TechnicalSheetMusicDetails">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing technical details of the ddex:SheetMusic.</xs:documentation>
             </xs:annotation>
@@ -2092,7 +2297,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="IndirectSoftwareId" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:MusicalWorkId">
+            type="ddexC:MusicalWorkId">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:MusicalWorkId of a ddex:MusicalWork used in the ern:Software.</xs:documentation>
             </xs:annotation>
@@ -2108,13 +2313,13 @@
             </xs:simpleType>
          </xs:element>
          <xs:element name="ResourceMusicalWorkReferenceList" minOccurs="0"
-                     type="ddexC:ResourceMusicalWorkReferenceList">
+            type="ddexC:ResourceMusicalWorkReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of one or more ddex:MusicalWorks contained in the ern:Software.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="ResourceContainedResourceReferenceList" minOccurs="0"
-                     type="ddexC:ResourceContainedResourceReferenceList">
+            type="ddexC:ResourceContainedResourceReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:ResourceContainedResourceReferences referring to a ddex:Resource that is contained in the current ern:Software.</xs:documentation>
             </xs:annotation>
@@ -2130,7 +2335,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="SoftwareDetailsByTerritory" maxOccurs="unbounded"
-                     type="ern:SoftwareDetailsByTerritory">
+            type="ern:SoftwareDetailsByTerritory">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ern:Software which may vary according to ddex:Territory of release.</xs:documentation>
             </xs:annotation>
@@ -2158,20 +2363,21 @@
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:Software details apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:ExcludedTerritory shall be present, but not both. </xs:documentation>
                </xs:annotation>
             </xs:element>
-            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded" type="ddexC:TerritoryCode">
+            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded"
+               type="ddexC:TerritoryCode">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:Software details do not apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:Territory shall be present, but not both.</xs:documentation>
                </xs:annotation>
             </xs:element>
          </xs:choice>
          <xs:element name="ResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ResourceContributor">
+            type="ern:ResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Contributor to the ddex:Software.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="IndirectResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:IndirectResourceContributor">
+            type="ddexC:IndirectResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of an indirect ddex:Contributor to the ddex:Software.</xs:documentation>
             </xs:annotation>
@@ -2217,13 +2423,13 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="ParentalWarningType" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ParentalWarningType">
+            type="ddexC:ParentalWarningType">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the classification of the ddex:Software according to advice which it carries about the level of explicitness or offensiveness of its content.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="TechnicalSoftwareDetails" minOccurs="0" maxOccurs="unbounded"
-                     type="ern:TechnicalSoftwareDetails">
+            type="ern:TechnicalSoftwareDetails">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing technical details of the ddex:Software.</xs:documentation>
             </xs:annotation>
@@ -2256,7 +2462,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="IndirectSoundRecordingId" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:MusicalWorkId">
+            type="ddexC:MusicalWorkId">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:MusicalWorkId of a ddex:MusicalWork used in the ern:SoundRecording.</xs:documentation>
             </xs:annotation>
@@ -2316,6 +2522,11 @@
                <xs:documentation source="ddex:Definition">The ddex:Flag indicating whether the ern:SoundRecording is generated by a computer (=True) or not (=False).</xs:documentation>
             </xs:annotation>
          </xs:element>
+         <xs:element name="IsRemastered" minOccurs="0" type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The ddex:Flag indicating whether the ern:SoundRecording is remastered (=True) or not (=False).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
          <xs:element name="NoSilenceBefore" minOccurs="0" type="xs:boolean">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">The ddex:Flag indicating whether the ern:SoundRecording is preceded by a period of silence (=False) or not (=True). </xs:documentation>
@@ -2347,19 +2558,19 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="SoundRecordingCollectionReferenceList" minOccurs="0"
-                     type="ddexC:SoundRecordingCollectionReferenceList">
+            type="ddexC:SoundRecordingCollectionReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of one or more ddex:Collections. The referenced ddex:Collection has to be of ddex:CollectionType ddex:AudioChapter.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="ResourceMusicalWorkReferenceList" minOccurs="0"
-                     type="ddexC:ResourceMusicalWorkReferenceList">
+            type="ddexC:ResourceMusicalWorkReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of one or more ddex:MusicalWorks contained in the ern:SoundRecording.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="ResourceContainedResourceReferenceList" minOccurs="0"
-                     type="ddexC:ResourceContainedResourceReferenceList">
+            type="ddexC:ResourceContainedResourceReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:ResourceContainedResourceReferences referring to a ddex:Resource that is contained in the current ern:SoundRecording.</xs:documentation>
             </xs:annotation>
@@ -2375,9 +2586,34 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="SoundRecordingDetailsByTerritory" maxOccurs="unbounded"
-                     type="ern:SoundRecordingDetailsByTerritory">
+            type="ern:SoundRecordingDetailsByTerritory">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:Descriptors and other attributes of the ern:SoundRecording which may vary according to ddex:Territory.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="TerritoryOfCommissioning" minOccurs="0" type="ddexC:TerritoryCode">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The country of commissioning (represented by an ISO 3166-1 iso3166a2:TerritoryCode).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="NumberOfFeaturedArtists" minOccurs="0" type="xs:integer">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The number of ddex:FeaturedArtists associated with the ddex:SoundRecording.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="NumberOfNonFeaturedArtists" minOccurs="0" type="xs:integer">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The number of ddex:NonFeaturedArtists associated with the ddex:SoundRecording.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="NumberOfContractedArtists" minOccurs="0" type="xs:integer">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The number of ddex:ContractedArtists associated with the ddex:SoundRecording.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="NumberOfNonContractedArtists" minOccurs="0" type="xs:integer">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The number of ddex:NonContractedArtists associated with the ddex:SoundRecording.</xs:documentation>
             </xs:annotation>
          </xs:element>
       </xs:sequence>
@@ -2403,7 +2639,8 @@
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:SoundRecording details apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:ExcludedTerritory shall be present, but not both. </xs:documentation>
                </xs:annotation>
             </xs:element>
-            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded" type="ddexC:TerritoryCode">
+            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded"
+               type="ddexC:TerritoryCode">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:SoundRecording details do not apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:Territory shall be present, but not both.</xs:documentation>
                </xs:annotation>
@@ -2419,14 +2656,19 @@
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:DisplayArtist for the ddex:SoundRecording. The ddex:DisplayArtist may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
             </xs:annotation>
          </xs:element>
+         <xs:element name="DisplayConductor" minOccurs="0" maxOccurs="unbounded" type="ddexC:Artist">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:DisplayConductor for the ddex:SoundRecording. A ddex:DisplayConductor may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
          <xs:element name="ResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ResourceContributor">
+            type="ern:ResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Contributor to the ddex:SoundRecording.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="IndirectResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:IndirectResourceContributor">
+            type="ddexC:IndirectResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of an indirect ddex:Contributor to the ddex:SoundRecording.</xs:documentation>
             </xs:annotation>
@@ -2442,7 +2684,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="RightsController" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:RightsController">
+            type="ern:RightsController">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:RightsController of Rights in the ddex:SoundRecording.</xs:documentation>
             </xs:annotation>
@@ -2473,7 +2715,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="HostSoundCarrier" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:HostSoundCarrier">
+            type="ddexC:HostSoundCarrier">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:HostSoundCarrier on which the ddex:SoundRecording appears (e.g., the CD on which it was originally released). This ddex:Composite exists in the Release Notification Message Suite Standard, to support the identification and matching of ddex:SoundRecording information.</xs:documentation>
             </xs:annotation>
@@ -2489,7 +2731,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="ParentalWarningType" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ParentalWarningType">
+            type="ddexC:ParentalWarningType">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the classification of the ddex:SoundRecording according to advice which it carries about the level of explicitness or offensiveness of its content.</xs:documentation>
             </xs:annotation>
@@ -2500,7 +2742,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="TechnicalSoundRecordingDetails" minOccurs="0" maxOccurs="unbounded"
-                     type="ern:TechnicalSoundRecordingDetails">
+            type="ern:TechnicalSoundRecordingDetails">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing technical details of the ddex:SoundRecording.</xs:documentation>
             </xs:annotation>
@@ -2646,7 +2888,7 @@
          </xs:element>
          <xs:choice minOccurs="0">
             <xs:element name="FileAvailabilityDescription" maxOccurs="unbounded"
-                        type="ddexC:Description">
+               type="ddexC:Description">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Composite containing a ddex:Description providing details of how a ddex:DSP can obtain a ddex:File that contains the ddex:Image.</xs:documentation>
                </xs:annotation>
@@ -2721,7 +2963,7 @@
          </xs:element>
          <xs:choice minOccurs="0">
             <xs:element name="FileAvailabilityDescription" maxOccurs="unbounded"
-                        type="ddexC:Description">
+               type="ddexC:Description">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Composite containing a ddex:Description providing details of how a ddex:DSP can obtain a ddex:File that contains the ddex:MIDI.</xs:documentation>
                </xs:annotation>
@@ -2806,7 +3048,7 @@
          </xs:element>
          <xs:choice minOccurs="0">
             <xs:element name="FileAvailabilityDescription" maxOccurs="unbounded"
-                        type="ddexC:Description">
+               type="ddexC:Description">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Composite containing a ddex:Description providing details of how a ddex:DSP can obtain a ddex:File that contains the ddex:SheetMusic.</xs:documentation>
                </xs:annotation>
@@ -2876,7 +3118,7 @@
          </xs:element>
          <xs:choice minOccurs="0">
             <xs:element name="FileAvailabilityDescription" maxOccurs="unbounded"
-                        type="ddexC:Description">
+               type="ddexC:Description">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Composite containing a ddex:Description providing details of how a ddex:DSP can obtain a ddex:File that contains the ddex:Software.</xs:documentation>
                </xs:annotation>
@@ -2986,7 +3228,7 @@
          </xs:element>
          <xs:choice minOccurs="0">
             <xs:element name="FileAvailabilityDescription" maxOccurs="unbounded"
-                        type="ddexC:Description">
+               type="ddexC:Description">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Composite containing a ddex:Description providing details of how a ddex:DSP can obtain a ddex:File that contains the ddex:SoundRecording.</xs:documentation>
                </xs:annotation>
@@ -3061,7 +3303,7 @@
          </xs:element>
          <xs:choice minOccurs="0">
             <xs:element name="FileAvailabilityDescription" maxOccurs="unbounded"
-                        type="ddexC:Description">
+               type="ddexC:Description">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Composite containing a ddex:Description providing details of how a ddex:DSP can obtain a ddex:File that contains the ddex:Text.</xs:documentation>
                </xs:annotation>
@@ -3100,7 +3342,7 @@
             </xs:simpleType>
          </xs:element>
          <xs:element name="UserDefinedValue" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:UserDefinedValue">
+            type="ddexC:UserDefinedValue">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:UserDefinedValue.</xs:documentation>
             </xs:annotation>
@@ -3127,7 +3369,7 @@
          </xs:element>
          <xs:choice minOccurs="0">
             <xs:element name="FileAvailabilityDescription" maxOccurs="unbounded"
-                        type="ddexC:Description">
+               type="ddexC:Description">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Composite containing a ddex:Description providing details of how a ddex:DSP can obtain a ddex:File that contains the ddex:UserDefinedResource.</xs:documentation>
                </xs:annotation>
@@ -3282,7 +3524,7 @@
          </xs:element>
          <xs:choice minOccurs="0">
             <xs:element name="FileAvailabilityDescription" maxOccurs="unbounded"
-                        type="ddexC:Description">
+               type="ddexC:Description">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Composite containing a ddex:Description providing details of how a ddex:DSP can obtain a ddex:File that contains the ddex:Video.</xs:documentation>
                </xs:annotation>
@@ -3326,7 +3568,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="IndirectTextId" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:MusicalWorkId">
+            type="ddexC:MusicalWorkId">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:MusicalWorkId of a ddex:MusicalWork used in the ern:Text.</xs:documentation>
             </xs:annotation>
@@ -3342,13 +3584,13 @@
             </xs:simpleType>
          </xs:element>
          <xs:element name="ResourceMusicalWorkReferenceList" minOccurs="0"
-                     type="ddexC:ResourceMusicalWorkReferenceList">
+            type="ddexC:ResourceMusicalWorkReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of one or more ddex:MusicalWorks contained in the ern:Text.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="ResourceContainedResourceReferenceList" minOccurs="0"
-                     type="ddexC:ResourceContainedResourceReferenceList">
+            type="ddexC:ResourceContainedResourceReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:ResourceContainedResourceReferences referring to a ddex:Resource that is contained in the current ern:Text.</xs:documentation>
             </xs:annotation>
@@ -3364,7 +3606,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="TextDetailsByTerritory" maxOccurs="unbounded"
-                     type="ern:TextDetailsByTerritory">
+            type="ern:TextDetailsByTerritory">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ern:Text which may vary according to ddex:Territory of release.</xs:documentation>
             </xs:annotation>
@@ -3392,20 +3634,21 @@
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:Text details apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:ExcludedTerritory shall be present, but not both.</xs:documentation>
                </xs:annotation>
             </xs:element>
-            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded" type="ddexC:TerritoryCode">
+            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded"
+               type="ddexC:TerritoryCode">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:Text details do not apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:Territory shall be present, but not both.</xs:documentation>
                </xs:annotation>
             </xs:element>
          </xs:choice>
          <xs:element name="ResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ResourceContributor">
+            type="ern:ResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Contributor to the ddex:Text.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="IndirectResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:IndirectResourceContributor">
+            type="ddexC:IndirectResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of an indirect ddex:Contributor to the ddex:Text.</xs:documentation>
             </xs:annotation>
@@ -3446,13 +3689,13 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="ParentalWarningType" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ParentalWarningType">
+            type="ddexC:ParentalWarningType">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the classification of the ddex:Text according to advice which it carries about the level of explicitness or offensiveness of its content.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="TechnicalTextDetails" minOccurs="0" maxOccurs="unbounded"
-                     type="ern:TechnicalTextDetails">
+            type="ern:TechnicalTextDetails">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing technical details of the ddex:Text.</xs:documentation>
             </xs:annotation>
@@ -3470,7 +3713,7 @@
       </xs:annotation>
       <xs:sequence>
          <xs:element name="UserDefinedResourceType" minOccurs="0"
-                     type="ddexC:UserDefinedResourceType">
+            type="ddexC:UserDefinedResourceType">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:Type of the ern:UserDefinedResource.</xs:documentation>
             </xs:annotation>
@@ -3481,13 +3724,13 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="UserDefinedResourceId" maxOccurs="unbounded"
-                     type="ddexC:UserDefinedResourceId">
+            type="ddexC:UserDefinedResourceId">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:Identifiers of the ern:UserDefinedResource.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="IndirectUserDefinedResourceId" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:MusicalWorkId">
+            type="ddexC:MusicalWorkId">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:MusicalWorkId of a ddex:MusicalWork used in the ern:UserDefinedResource.</xs:documentation>
             </xs:annotation>
@@ -3503,13 +3746,13 @@
             </xs:simpleType>
          </xs:element>
          <xs:element name="ResourceMusicalWorkReferenceList" minOccurs="0"
-                     type="ddexC:ResourceMusicalWorkReferenceList">
+            type="ddexC:ResourceMusicalWorkReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of one or more ddex:MusicalWorks contained in the ern:UserDefinedResource.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="ResourceContainedResourceReferenceList" minOccurs="0"
-                     type="ddexC:ResourceContainedResourceReferenceList">
+            type="ddexC:ResourceContainedResourceReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:ResourceContainedResourceReferences referring to a ddex:Resource that is contained in the current ern:UserDefinedResource.</xs:documentation>
             </xs:annotation>
@@ -3520,13 +3763,13 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="UserDefinedValue" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:UserDefinedValue">
+            type="ddexC:UserDefinedValue">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:UserDefinedValue.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="UserDefinedResourceDetailsByTerritory" maxOccurs="unbounded"
-                     type="ern:UserDefinedResourceDetailsByTerritory">
+            type="ern:UserDefinedResourceDetailsByTerritory">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ern:UserDefinedResource which may vary according to ddex:Territory of release.</xs:documentation>
             </xs:annotation>
@@ -3554,26 +3797,27 @@
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:UserDefinedResource details apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:ExcludedTerritory shall be present, but not both. </xs:documentation>
                </xs:annotation>
             </xs:element>
-            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded" type="ddexC:TerritoryCode">
+            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded"
+               type="ddexC:TerritoryCode">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:UserDefinedResource details do not apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:Territory shall be present, but not both.</xs:documentation>
                </xs:annotation>
             </xs:element>
          </xs:choice>
          <xs:element name="ResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ResourceContributor">
+            type="ern:ResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Contributor to the ddex:UserDefinedResource.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="IndirectResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:IndirectResourceContributor">
+            type="ddexC:IndirectResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of an indirect ddex:Contributor to the ddex:UserDefinedResource.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="UserDefinedValue" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:UserDefinedValue">
+            type="ddexC:UserDefinedValue">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:UserDefinedValue.</xs:documentation>
             </xs:annotation>
@@ -3614,13 +3858,13 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="ParentalWarningType" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ParentalWarningType">
+            type="ddexC:ParentalWarningType">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the classification of the ddex:UserDefinedResource according to advice which it carries about the level of explicitness or offensiveness of its content.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="TechnicalUserDefinedResourceDetails" minOccurs="0" maxOccurs="unbounded"
-                     type="ern:TechnicalUserDefinedResourceDetails">
+            type="ern:TechnicalUserDefinedResourceDetails">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing technical details of the ddex:UserDefinedResource.</xs:documentation>
             </xs:annotation>
@@ -3653,7 +3897,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="IndirectVideoId" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:MusicalWorkId">
+            type="ddexC:MusicalWorkId">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:MusicalWorkId of a ddex:MusicalWork used in the ern:Video.</xs:documentation>
             </xs:annotation>
@@ -3670,7 +3914,7 @@
          </xs:element>
          <xs:choice minOccurs="0">
             <xs:element name="VideoCueSheetReference" maxOccurs="unbounded"
-                        type="ddexC:VideoCueSheetReference">
+               type="ddexC:VideoCueSheetReference">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Composite containing a ddex:VideoCueSheetReference for a ddex:CueSheet (specific to this ddex:Message).</xs:documentation>
                </xs:annotation>
@@ -3726,6 +3970,11 @@
                <xs:documentation source="ddex:Definition">The ddex:Flag indicating whether the ern:Video is additional to those on the original ddex:Release of which this is a ddex:Version (=True) or not (=False).</xs:documentation>
             </xs:annotation>
          </xs:element>
+         <xs:element name="IsRemastered" minOccurs="0" type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The ddex:Flag indicating whether the ern:Video is remastered (=True) or not (=False).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
          <xs:element name="NoSilenceBefore" minOccurs="0" type="xs:boolean">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">The ddex:Flag indicating whether the ern:Video is preceded by a period of silence (=False) or not (=True). </xs:documentation>
@@ -3742,7 +3991,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="LanguageOfPerformance" minOccurs="0" maxOccurs="unbounded"
-                     type="iso639a2:LanguageCode">
+            type="iso639a2:LanguageCode">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">The ddex:Language of the ddex:Performance recorded in the ern:Video (represented by an ISO 639-2 iso639a2:LanguageCode).</xs:documentation>
             </xs:annotation>
@@ -3758,19 +4007,19 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="VideoCollectionReferenceList" minOccurs="0"
-                     type="ddexC:SoundRecordingCollectionReferenceList">
+            type="ddexC:SoundRecordingCollectionReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of one or more ddex:Collections. The referenced ddex:Collection has to be of ddex:CollectionType ddex:VideoChapter.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="ResourceMusicalWorkReferenceList" minOccurs="0"
-                     type="ddexC:ResourceMusicalWorkReferenceList">
+            type="ddexC:ResourceMusicalWorkReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of one or more ddex:MusicalWorks contained in the ern:Video.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="ResourceContainedResourceReferenceList" minOccurs="0"
-                     type="ddexC:ResourceContainedResourceReferenceList">
+            type="ddexC:ResourceContainedResourceReferenceList">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:ResourceContainedResourceReferences referring to a ddex:Resource that is contained in the current ern:Video.</xs:documentation>
             </xs:annotation>
@@ -3786,9 +4035,34 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="VideoDetailsByTerritory" maxOccurs="unbounded"
-                     type="ern:VideoDetailsByTerritory">
+            type="ern:VideoDetailsByTerritory">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:Descriptors and other attributes of the ern:Video which may vary according to ddex:Territory of release. </xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="TerritoryOfCommissioning" minOccurs="0" type="ddexC:TerritoryCode">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The country of commissioning (represented by an ISO 3166-1 iso3166a2:TerritoryCode).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="NumberOfFeaturedArtists" minOccurs="0" type="xs:integer">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The number of ddex:FeaturedArtists associated with the ddex:Video.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="NumberOfNonFeaturedArtists" minOccurs="0" type="xs:integer">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The number of ddex:NonFeaturedArtists associated with the ddex:Video.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="NumberOfContractedArtists" minOccurs="0" type="xs:integer">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The number of ddex:ContractedArtists associated with the ddex:Video.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="NumberOfNonContractedArtists" minOccurs="0" type="xs:integer">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The number of ddex:NonContractedArtists associated with the ddex:Video.</xs:documentation>
             </xs:annotation>
          </xs:element>
       </xs:sequence>
@@ -3814,7 +4088,8 @@
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:SoundRecording details apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:ExcludedTerritory shall be present, but not both. </xs:documentation>
                </xs:annotation>
             </xs:element>
-            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded" type="ddexC:TerritoryCode">
+            <xs:element name="ExcludedTerritoryCode" maxOccurs="unbounded"
+               type="ddexC:TerritoryCode">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:Territory to which the ddex:SoundRecording details do not apply (represented by an ISO 3166-1 iso3166a2:TerritoryCode). Either this ddex:Element or ddex:Territory shall be present, but not both.</xs:documentation>
                </xs:annotation>
@@ -3830,14 +4105,19 @@
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:DisplayArtist for the ddex:SoundRecording. The ddex:DisplayArtist may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
             </xs:annotation>
          </xs:element>
-         <xs:element name="ResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ResourceContributor">
+         <xs:element name="DisplayConductor" minOccurs="0" maxOccurs="unbounded" type="ddexC:Artist">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Contributor to the ddex:SoundRecording.</xs:documentation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:DisplayConductor for the ddex:Video. A ddex:DisplayConductor may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ResourceContributor" minOccurs="0" maxOccurs="unbounded"
+            type="ern:ResourceContributor">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Contributor to the ddex:Video.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="IndirectResourceContributor" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:IndirectResourceContributor">
+            type="ddexC:IndirectResourceContributor">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of an indirect ddex:Contributor to the ddex:SoundRecording.</xs:documentation>
             </xs:annotation>
@@ -3853,9 +4133,9 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="RightsController" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:RightsController">
+            type="ern:RightsController">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:RightsController of Rights in the ddex:SoundRecording.</xs:documentation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:RightsController of Rights in the ddex:Video.</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="RemasteredDate" minOccurs="0" type="ddexC:EventDate">
@@ -3884,7 +4164,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="HostSoundCarrier" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:HostSoundCarrier">
+            type="ddexC:HostSoundCarrier">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:HostSoundCarrier on which the ddex:Video appears (e.g., the CD on which it was originally released). This ddex:Composite exists in the Release Notification Message Suite Standard, to support the identification and matching of ddex:Video information.</xs:documentation>
             </xs:annotation>
@@ -3900,7 +4180,7 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="ParentalWarningType" minOccurs="0" maxOccurs="unbounded"
-                     type="ddexC:ParentalWarningType">
+            type="ddexC:ParentalWarningType">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the classification of the ddex:Video according to advice which it carries about the level of explicitness or offensiveness of its content.</xs:documentation>
             </xs:annotation>
@@ -3931,12 +4211,12 @@
             </xs:annotation>
          </xs:element>
          <xs:element name="TechnicalVideoDetails" minOccurs="0" maxOccurs="unbounded"
-                     type="ern:TechnicalVideoDetails">
+            type="ern:TechnicalVideoDetails">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing technical details of the ddex:Video.</xs:documentation>
             </xs:annotation>
          </xs:element>
-         <xs:element name="Character" minOccurs="0" maxOccurs="unbounded" type="ddexC:Character">
+         <xs:element name="Character" minOccurs="0" maxOccurs="unbounded" type="ern:Character">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Character in the ddex:Video. A ddex:Character may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
             </xs:annotation>

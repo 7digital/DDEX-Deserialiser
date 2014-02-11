@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:ddexC="http://ddex.net/xml/20120404/ddexC"
-           xmlns:ddex="http://ddex.net/xml/20120404/ddex"
-           xmlns:iso639a2="http://ddex.net/xml/20120404/iso639a2"
-           xmlns:iso4217a="http://ddex.net/xml/20120404/iso4217a"
-           xmlns:iso3166a2="http://ddex.net/xml/20120404/iso3166a2"
-           targetNamespace="http://ddex.net/xml/20120404/ddexC"
+   xmlns:ddexC="http://ddex.net/xml/20121219/ddexC"
+   xmlns:ddex="http://ddex.net/xml/20121219/ddex"
+   xmlns:iso639a2="http://ddex.net/xml/20121219/iso639a2"
+   xmlns:iso4217a="http://ddex.net/xml/20121219/iso4217a"
+   xmlns:iso3166a2="http://ddex.net/xml/20121219/iso3166a2"
+   targetNamespace="http://ddex.net/xml/20121219/ddexC"
            elementFormDefault="unqualified"
            attributeFormDefault="unqualified">
-   <xs:import namespace="http://ddex.net/xml/20120404/ddex"  schemaLocation="http://ddex.net/xml/20120404/ddex.xsd"/>
-   <xs:import namespace="http://ddex.net/xml/20120404/iso639a2"  schemaLocation="http://ddex.net/xml/20120404/iso639a2.xsd"/>
-   <xs:import namespace="http://ddex.net/xml/20120404/iso4217a"  schemaLocation="http://ddex.net/xml/20120404/iso4217a.xsd"/>
- <xs:import namespace="http://ddex.net/xml/20120404/iso3166a2"  schemaLocation="http://ddex.net/xml/20120404/iso3166a2.xsd"/> 
+   <xs:import namespace="http://ddex.net/xml/20121219/ddex" schemaLocation="ddex.xsd"/>
+   <xs:import namespace="http://ddex.net/xml/20121219/iso639a2" schemaLocation="iso639a2.xsd"/>
+   <xs:import namespace="http://ddex.net/xml/20121219/iso4217a" schemaLocation="iso4217a.xsd"/>
+   <xs:import namespace="http://ddex.net/xml/20121219/iso3166a2"
+              schemaLocation="iso3166a2.xsd"/>
    <xs:annotation>
       <xs:documentation>© 2006-2012 Digital Data Exchange, LLC (DDEX)</xs:documentation>
    </xs:annotation>
@@ -186,7 +187,7 @@
                </xs:element>
             </xs:sequence>
          </xs:choice>
-         <xs:element name="ArtistRole" minOccurs="0" maxOccurs="unbounded" type="ddexC:ArtistRole">
+         <xs:element name="ArtistRole" maxOccurs="unbounded" type="ddexC:ArtistRole">
             <xs:annotation>
                <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a role played by the ddexC:Artist in relation to other ddex:Artists.</xs:documentation>
             </xs:annotation>
@@ -197,6 +198,40 @@
             <xs:documentation source="ddex:Definition">The number indicating the order of the ddexC:Artist in a group of ddex:Artists. This is represented in an XML schema as an XML ddex:Attribute. </xs:documentation>
          </xs:annotation>
       </xs:attribute>
+   </xs:complexType>
+   <xs:complexType name="ArtistDelegatedUsageRights">
+      <xs:annotation>
+         <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the kinds of usage for which rights have been delegated by an ddex:Artist.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="UseType" maxOccurs="unbounded" type="ddexC:UseType">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the use for which rights are delegated.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="UserInterfaceType" minOccurs="0" maxOccurs="unbounded"
+                     type="ddexC:UserInterfaceType">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a physical interface by which a ddex:Consumer uses a ddex:Service or ddex:Release.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="PeriodOfRightsDelegation" type="ddexC:Period">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details about a ddex:Period of ddex:Time for which the delegation of usage rights applies. ddex:Periods are typically described by at least a ddex:StartDate or ddex:EndDate.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="TerritoryOfRightsDelegation" maxOccurs="unbounded"
+                     type="ddexC:TerritoryCode">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Territory for which the delegation of usage rights applies (represented by an ISO 3166-1 iso3166a2:TerritoryCode).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="MembershipType" type="ddex:MembershipType">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Type of membership of the ddex:Artist.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
    </xs:complexType>
    <xs:complexType name="ArtistRole">
       <xs:annotation>
@@ -364,42 +399,6 @@
             </xs:attribute>
          </xs:extension>
       </xs:simpleContent>
-   </xs:complexType>
-   <xs:complexType name="Character">
-      <xs:annotation>
-         <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Character. A ddex:Character may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
-      </xs:annotation>
-      <xs:sequence>
-         <xs:choice>
-            <xs:element name="PartyId" type="ddexC:PartyId">
-               <xs:annotation>
-                  <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:PartyId for the ddex:Party. If no ddex:Namespace is given, the ddex:Identifier is a ddex:DdexPartyId (DPID). Note that DPIDs are not normally used to identify ddex:Artists, ddex:Producers or other ddex:Creators.</xs:documentation>
-               </xs:annotation>
-            </xs:element>
-            <xs:sequence>
-               <xs:element name="PartyName" maxOccurs="unbounded" type="ddexC:PartyName">
-                  <xs:annotation>
-                     <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the PartyName(s).</xs:documentation>
-                  </xs:annotation>
-               </xs:element>
-               <xs:element name="PartyId" minOccurs="0" type="ddexC:PartyId">
-                  <xs:annotation>
-                     <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:PartyId for the ddex:Party. If no ddex:Namespace is given, the ddex:Identifier is a ddex:DdexPartyId (DPID). Note that DPIDs are not normally used to identify ddex:Artists, ddex:Producers or other ddex:Creators.</xs:documentation>
-                  </xs:annotation>
-               </xs:element>
-            </xs:sequence>
-         </xs:choice>
-         <xs:element name="ResourceContributor" minOccurs="0" type="ddexC:ResourceContributor">
-            <xs:annotation>
-               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:Name, ddex:Identifier and role(s) of a ddex:Contributor.</xs:documentation>
-            </xs:annotation>
-         </xs:element>
-      </xs:sequence>
-      <xs:attribute name="SequenceNumber" type="xs:integer">
-         <xs:annotation>
-            <xs:documentation source="ddex:Definition">The number indicating the order of the ddexC:Character in a group of ddex:Characters. This is represented in an XML schema as an XML ddex:Attribute. </xs:documentation>
-         </xs:annotation>
-      </xs:attribute>
    </xs:complexType>
    <xs:complexType name="Collection">
       <xs:annotation>
@@ -731,6 +730,28 @@
          </xs:extension>
       </xs:simpleContent>
    </xs:complexType>
+   <xs:complexType name="ContactId">
+      <xs:annotation>
+         <xs:documentation source="ddex:Definition">A ddex:Composite containing details of contact ddex:Identifiers of a ddex:Party.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="EmailAddress" minOccurs="0" maxOccurs="unbounded" type="xs:string">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">An ddex:EmailAddress of the ddex:Party.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="PhoneNumber" minOccurs="0" maxOccurs="unbounded" type="xs:string">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:PhoneNumber of the ddex:Party.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="FaxNumber" minOccurs="0" maxOccurs="unbounded" type="xs:string">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:FaxNumber of the ddex:Party.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
    <xs:complexType name="ContainerFormat">
       <xs:annotation>
          <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:ContainerFormat.</xs:documentation>
@@ -745,6 +766,20 @@
             <xs:attribute name="UserDefinedValue" type="xs:string">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">A ddex:UserDefined value of the ddex:ContainerFormat. This is represented in an XML schema as an XML ddex:Attribute.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="ConversionRate">
+      <xs:annotation>
+         <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:ConversionRate for a ddex:Currency.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:decimal">
+            <xs:attribute name="CurrencyCode" type="ddexC:CurrencyCode" use="required">
+               <xs:annotation>
+                  <xs:documentation source="ddex:Definition">The ddex:Currency of the ddexC:ConversionRate (represented by an ISO 4217 iso4217a:CurrencyCode). This is represented in an XML schema as an XML ddex:Attribute.</xs:documentation>
                </xs:annotation>
             </xs:attribute>
          </xs:extension>
@@ -1194,6 +1229,35 @@
             </xs:attribute>
          </xs:extension>
       </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="DelegatedUsageRights">
+      <xs:annotation>
+         <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the kinds of usage for which rights have been delegated.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="UseType" maxOccurs="unbounded" type="ddexC:UseType">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the use for which rights are delegated.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="UserInterfaceType" minOccurs="0" maxOccurs="unbounded"
+                     type="ddexC:UserInterfaceType">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a physical interface by which a ddex:Consumer uses a ddex:Service or ddex:Release.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="PeriodOfRightsDelegation" type="ddexC:Period">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details about a ddex:Period of ddex:Time for which the delegation of usage rights applies. ddex:Periods are typically described by at least a ddex:StartDate or ddex:EndDate.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="TerritoryOfRightsDelegation" maxOccurs="unbounded"
+                     type="ddexC:TerritoryCode">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Territory for which the delegation of usage rights applies (represented by an ISO 3166-1 iso3166a2:TerritoryCode).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
    </xs:complexType>
    <xs:complexType name="Description">
       <xs:annotation>
@@ -2016,6 +2080,25 @@
          </xs:extension>
       </xs:simpleContent>
    </xs:complexType>
+   <xs:complexType name="LicenseRejectionReason">
+      <xs:annotation>
+         <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:LicenseRejectionReason.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="ddex:LicenseRejectionReason">
+            <xs:attribute name="Namespace" type="xs:string">
+               <xs:annotation>
+                  <xs:documentation source="ddex:Definition">The ddex:Namespace of the ddexC:LicenseRejectionReason. This is represented in an XML schema as an XML ddex:Attribute.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="UserDefinedValue" type="xs:string">
+               <xs:annotation>
+                  <xs:documentation source="ddex:Definition">A ddex:UserDefined value of the ddexC:LicenseRejectionReason. This is represented in an XML schema as an XML ddex:Attribute.</xs:documentation>
+               </xs:annotation>
+            </xs:attribute>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
    <xs:complexType name="LinkedReleaseResourceReference">
       <xs:annotation>
          <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:LinkedReleaseResourceReference for a ddex:Resource which is linked to a ddex:ContentItem.</xs:documentation>
@@ -2034,6 +2117,33 @@
             </xs:attribute>
          </xs:extension>
       </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="Membership">
+      <xs:annotation>
+         <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a membership in a collective rights management organization.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="Organization" type="ddexC:PartyDescriptor">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the collective rights management organization.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="MembershipType" type="ddex:MembershipType">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Type of membership.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="StartDate" minOccurs="0" type="xs:date">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The ddex:StartDate of the membership.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="EndDate" minOccurs="0" type="xs:date">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The ddex:EndDate of the membership.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
    </xs:complexType>
    <xs:complexType name="MessageActionType">
       <xs:annotation>
@@ -3160,12 +3270,12 @@
          </xs:element>
          <xs:element name="ReleaseDate" minOccurs="0" type="ddexC:EventDate">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the Date and ddex:Place of the ddex:Event in which the related ddex:Release is made available for Usage.</xs:documentation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the Date and ddex:Place of the ddex:Event in which the related ddex:Release was or will be first made available for Usage in its current form, whether for physical or electronic/online distribution (in ISO 8601:2004 format: YYYY-MM-DD).</xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="OriginalReleaseDate" minOccurs="0" type="ddexC:EventDate">
             <xs:annotation>
-               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the Date and ddex:Place of the ddex:Event in which the ddex:Release was or will be first made available for Usage, whether for physical or electronic/online distribution (in ISO 8601:2004 format: YYYY-MM-DD).</xs:documentation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the Date and ddex:Place of the ddex:Event in which the collection of tracks for the ddex:Release (e.g. the equivalent physical album on vinyl) was or will be first made available for Usage, whether for physical or electronic/online distribution (in ISO 8601:2004 format: YYYY-MM-DD).</xs:documentation>
             </xs:annotation>
          </xs:element>
       </xs:sequence>
@@ -3625,6 +3735,158 @@
          </xs:extension>
       </xs:simpleContent>
    </xs:complexType>
+   <xs:complexType name="ResourceGroup">
+      <xs:annotation>
+         <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:ResourceGroup. ResourceGroups are used to signal groupings or sequences of ddex:Resources within a ddex:Release. Examples include individual carriers in a multi-carrier ddex:Release or classical ddex:Work groupings as well as the default order of ddex:Resources within a ddex:Release.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="Title" minOccurs="0" maxOccurs="unbounded" type="ddexC:Title">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Title of the ern:ResourceGroup. Typically this will apply to 'sub' ddex:ResourceGroups within a hierarchy, e.g., different ddex:Albums in a ddex:Set.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="SequenceNumber" minOccurs="0" type="xs:integer">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The number indicating the order of the ern:ResourceGroup within all ddex:ResourceGroups at this level. The default value is 1, and the value must be incremented by 1 for each ern:ResourceGroup occurring at a particular level. The ddex:SequenceNumber is unique within its ddex:ResourceGroupLevelNumber.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="DisplayArtist" minOccurs="0" maxOccurs="unbounded" type="ddexC:Artist">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:DisplayArtist for the ern:ResourceGroup. The ddex:DisplayArtist may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="DisplayConductor" minOccurs="0" maxOccurs="unbounded" type="ddexC:Artist">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:DisplayConductor for the ern:ResourceGroup. A ddex:DisplayConductor may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="DisplayComposer" minOccurs="0" maxOccurs="unbounded" type="ddexC:Artist">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:DisplayComposer for the ern:ResourceGroup. A ddex:DisplayComposer may be described through ddex:Name, ddex:Identifier and Roles.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ResourceContributor" minOccurs="0" maxOccurs="unbounded"
+                     type="ddexC:ResourceContributor">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Contributor to this ern:ResourceGroup. This includes roles such as the compiler of the ern:ResourceGroup, and may summarize details of ddex:Contributors to individual ddex:SoundRecordings or other content.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="IndirectResourceContributor" minOccurs="0" maxOccurs="unbounded"
+                     type="ddexC:IndirectResourceContributor">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of an indirect ddex:Contributor to this ern:ResourceGroup.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ResourceGroup" minOccurs="0" maxOccurs="unbounded"
+                     type="ddexC:ResourceGroup">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ern:ResourceGroup contained within this ern:ResourceGroup. ResourceGroups are used to signal groupings or sequences of ddex:Resources within a ddex:Release. Examples include individual carriers in a multi-carrier ddex:Release or classical ddex:Work groupings as well as the default order of ddex:Resources within a ddex:Release.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:choice>
+            <xs:element name="ResourceGroupContentItem" minOccurs="0" maxOccurs="unbounded"
+                        type="ddexC:ResourceGroupContentItem">
+               <xs:annotation>
+                  <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Resource contained in the ern:ResourceGroup.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+            <xs:element name="ResourceGroupResourceReferenceList" minOccurs="0"
+                        type="ddexC:ResourceGroupResourceReferenceList">
+               <xs:annotation>
+                  <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Resource contained in the ern:ResourceGroup.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+         </xs:choice>
+         <xs:choice minOccurs="0">
+            <xs:element name="ResourceGroupReleaseReference">
+               <xs:annotation>
+                  <xs:documentation source="ddex:Definition">The ddex:Identifier (specific to the ddex:Message) of a ddex:Release which has the same content as the ern:ResourceGroup. This is a ddex:LocalReleaseAnchorReference starting with the letter R.</xs:documentation>
+               </xs:annotation>
+               <xs:simpleType>
+                  <xs:restriction base="xs:IDREF">
+                     <xs:pattern value="R[\d\-_a-zA-Z]+"/>
+                  </xs:restriction>
+               </xs:simpleType>
+            </xs:element>
+            <xs:element name="ReleaseId" type="ddexC:ReleaseId">
+               <xs:annotation>
+                  <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:ReleaseIds of a ddex:Release which has the same content as the ern:ResourceGroup. If available, a ddex:GRid has to be used. If the ddex:Release contains only one ddex:SoundRecording, the ddex:ISRC of the ddex:SoundRecording may be used instead. If the ddex:Release is an abstraction of a complete ddex:PhysicalProduct (such as a CD ddex:Album), the ddex:ICPN of the ddex:PhysicalProduct may be used instead.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+         </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="LanguageAndScriptCode" type="xs:string">
+         <xs:annotation>
+            <xs:documentation source="ddex:Definition">The ddex:Language and script for the ddex:Elements of the ern:ResourceGroup as defined in IETF RfC 4646. The default is the same as indicated for the containing composite. ddex:Language and Script are provided as lang[-scipt][-region][-variant].  This is represented in an XML schema as an XML ddex:Attribute.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+   </xs:complexType>
+   <xs:complexType name="ResourceGroupContentItem">
+      <xs:annotation>
+         <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:Resource which is a ddex:ContentItem of a ddex:ResourceGroup.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="SequenceNumber" minOccurs="0" type="xs:integer">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The number indicating the order of the ddex:ContentItem among all ddex:Resources within this ddex:ResourceGroup. This is analogous to the ddex:Track number on a ddex:SoundCarrier. Not all ddex:ResourceGroups necessarily have ddex:SequenceNumbers (it is most applicable to ddex:SoundRecordings and ddex:MusicalWorkVideos). The ddex:SequenceNumber is unique within its ddex:ResourceGroupLevelNumber.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="SequenceSubNumber" minOccurs="0" type="xs:integer">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The ddex:SequenceNumber within the ddex:SequenceNumber. Example: if a ddex:Track is subdivided into several numbered sections, these are numbered with a ddex:SequenceSubNumber. The ddex:SequenceSubNumber is unique within its ddex:SequenceNumber.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ResourceType" minOccurs="0" maxOccurs="unbounded"
+                     type="ddexC:ResourceType">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of the ddex:Type of the ddex:ContentItem.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ReleaseResourceReference" type="ddexC:ReleaseResourceReference">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing a ddex:ReleaseResourceReference for the ddex:ContentItem (specific to this ddex:Message). The ddex:LocalAnchorReference in this ddex:Composite is a xs:string starting with the letter A.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="LinkedReleaseResourceReference" minOccurs="0" maxOccurs="unbounded"
+                     type="ddexC:LinkedReleaseResourceReference">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">A ddex:Composite containing details of a ddex:ReleaseResourceReference (specific to this ddex:Message) for a ddex:Resource which is linked to this ddex:ContentItem. Example: an ddex:Image, ddex:Text or ddex:NonMusicalWorkVideo associated with a ddex:SoundRecording. This ddex:LocalAnchorReference is a xs:string starting with the letter A.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:choice minOccurs="0">
+            <xs:element name="ResourceGroupContentItemReleaseReference">
+               <xs:annotation>
+                  <xs:documentation source="ddex:Definition">The ddex:Identifier (specific to the ddex:Message) of a ddex:Release which has the same content as the ern:ResourceGroupContentItem. This is a ddex:LocalReleaseAnchorReference starting with the letter R.</xs:documentation>
+               </xs:annotation>
+               <xs:simpleType>
+                  <xs:restriction base="xs:IDREF">
+                     <xs:pattern value="R[\d\-_a-zA-Z]+"/>
+                  </xs:restriction>
+               </xs:simpleType>
+            </xs:element>
+            <xs:element name="ReleaseId" type="ddexC:ReleaseId">
+               <xs:annotation>
+                  <xs:documentation source="ddex:Definition">A ddex:Composite containing details of ddex:ReleaseIds of a ddex:Release which has the same content as the ern:ResourceGroupContentItem. If available, a ddex:GRid has to be used. If the ddex:Release contains only one ddex:SoundRecording, the ddex:ISRC of the ddex:SoundRecording may be used instead. If the ddex:Release is an abstraction of a complete ddex:PhysicalProduct (such as a CD ddex:Album), the ddex:ICPN of the ddex:PhysicalProduct may be used instead.</xs:documentation>
+               </xs:annotation>
+            </xs:element>
+         </xs:choice>
+         <xs:element name="Duration" minOccurs="0" type="xs:duration">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The ddex:Duration of the ddex:ContentItem featured, if it is a ddex:SoundRecording or ddex:Video (using the ISO 8601:2004 PT[[hhH]mmM]ssS format, where lower case characters indicate variables, upper case characters are part of the xs:string, e.g. one hour, two minutes and three seconds would be PT1H2M3S). This ddex:Duration may be less than the normal ddex:Duration of the ddex:ContentItem, if only a part of it is included.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="IsHiddenResource" minOccurs="0" type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The ddex:Flag indicating whether a ddex:Resource in a ddex:Release is hidden in some way from the ddex:Consumer (=True) or not (=False).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="IsBonusResource" minOccurs="0" type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation source="ddex:Definition">The ddex:Flag indicating whether a ddex:Resource in a ddex:Release is additional to those on the original ddex:Release of which this is a ddex:Version (=True) or not (=False).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
    <xs:complexType name="ResourceGroupResourceReferenceList">
       <xs:annotation>
          <xs:documentation source="ddex:Definition">A ddex:Composite containing a list of ddex:ResourceGroupResourceReferences.</xs:documentation>
@@ -3872,12 +4134,12 @@
             </xs:annotation>
          </xs:element>
          <xs:choice>
-            <xs:element name="PercentageUnknown" type="xs:boolean">
+            <xs:element name="RightShareUnknown" type="xs:boolean">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">The ddex:Flag indicating whether the ddex:RightSharePercentage is unknown (=True) or not (=False).</xs:documentation>
                </xs:annotation>
             </xs:element>
-            <xs:element name="PercentageRate" minOccurs="0" type="xs:string">
+            <xs:element name="RightSharePercentage" minOccurs="0" type="xs:string">
                <xs:annotation>
                   <xs:documentation source="ddex:Definition">The share of the licensed Rights owned by the ddex:RightsController. ddexC:RightShare information is given as a xs:decimal value (e.g. '0.125' represents 12.5%) or as a fraction (e.g. '1/8' represents 12.5%).</xs:documentation>
                </xs:annotation>
