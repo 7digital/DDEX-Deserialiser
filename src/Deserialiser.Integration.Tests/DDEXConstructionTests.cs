@@ -64,7 +64,7 @@ namespace Deserialiser.Unit.Tests
 		{
 			XDocument document = XDocument.Load("artifacts/Incorrect_DDEX.xml", LoadOptions.SetLineInfo);
 			var ex = Assert.Throws<XmlSchemaValidationException>(() => new DDEX(document, true));
-			Assert.That(ex.Message, Is.StringContaining("The element 'Release' has invalid child element 'ReleaseReference'. List of possible elements expected: 'ReleaseId'"));
+			Assert.That(ex.Message, Is.StringContaining("The element 'Release' has invalid child element 'InvalidNodeElement'. List of possible elements expected: 'ReleaseId'"));
 			Assert.That(ex.LineNumber * ex.LinePosition, Is.Not.EqualTo(0));
 		}
 
@@ -72,7 +72,7 @@ namespace Deserialiser.Unit.Tests
 		public void Should_throw_exception_if_DDEX_validation_fails_using_file_path()
 		{
 			var ex = Assert.Throws<XmlSchemaValidationException>(() => new DDEX("artifacts/Incorrect_DDEX.xml", true));
-			Assert.That(ex.Message, Is.StringContaining("The element 'Release' has invalid child element 'ReleaseReference'. List of possible elements expected: 'ReleaseId'"));
+			Assert.That(ex.Message, Is.StringContaining("The element 'Release' has invalid child element 'InvalidNodeElement'. List of possible elements expected: 'ReleaseId'"));
 			Assert.That(ex.LineNumber * ex.LinePosition, Is.Not.EqualTo(0));
 		}
 
@@ -82,7 +82,7 @@ namespace Deserialiser.Unit.Tests
 			using (var fileStream = new FileStream("artifacts/Incorrect_DDEX.xml", FileMode.Open))
 			{
 				var ex = Assert.Throws<XmlSchemaValidationException>(() => new DDEX(fileStream, true));
-				Assert.That(ex.Message, Is.StringContaining("The element 'Release' has invalid child element 'ReleaseReference'. List of possible elements expected: 'ReleaseId'"));
+				Assert.That(ex.Message, Is.StringContaining("The element 'Release' has invalid child element 'InvalidNodeElement'. List of possible elements expected: 'ReleaseId'"));
 				Assert.That(ex.LineNumber * ex.LinePosition, Is.Not.EqualTo(0));
 			}
 		}
