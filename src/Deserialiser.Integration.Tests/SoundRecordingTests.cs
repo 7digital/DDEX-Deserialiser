@@ -79,7 +79,7 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_sound_recording_details_have_artist_party_id()
         {
-            Assert.That(GetTerritoryDetails().DisplayArtists.Single().PartyId.Value, Is.EqualTo("448566"));
+            Assert.That(GetTerritoryDetails().DisplayArtists.Single().PartyIds.Single().Value, Is.EqualTo("448566"));
         }
 
         [Test]
