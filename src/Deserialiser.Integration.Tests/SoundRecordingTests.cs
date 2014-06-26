@@ -61,7 +61,7 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_sound_recording_details_have_worldwide_territory_code()
         {
-            Assert.That(GetTerritoryDetails().TerritoryCodes.Single(), Is.EqualTo("Worldwide"));
+            Assert.That(GetTerritoryDetails().TerritoryCodes.Single().Value, Is.EqualTo("Worldwide"));
         }
 
         [Test]

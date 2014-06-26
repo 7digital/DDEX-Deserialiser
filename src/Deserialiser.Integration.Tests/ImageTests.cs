@@ -48,7 +48,7 @@ namespace Deserialiser.Unit.Tests
         [Test]
         public void Should_image_have_worldwide_territory_details()
         {
-            Assert.That(GetImageDetails().TerritoryCodes.Single(), Is.EqualTo("Worldwide"));
+            Assert.That(GetImageDetails().TerritoryCodes.Single().Value, Is.EqualTo("Worldwide"));
         }
 
         [Test]
